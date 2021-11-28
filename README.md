@@ -1,3 +1,7 @@
-# Semana-Omnistack-9
-Semana Omnistack 9 da Rocketseat. NodeJs; ReactJs
-This is supposed to be a AirBnb clone. It was made following a tutorial in 2019 and remains unfinished. This does not represent my current programming level and I plan to update this project very soon.
+# AirBnb-CLone
+{ NestJs, ReactJs }
+
+Aiming to recreate most of the basics functionalities and appearances of https://www.airbnb.com
+Make mobile version is not a priorite at the moment.
+
+Major updates will be recorded in this file.
