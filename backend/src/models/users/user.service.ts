@@ -12,7 +12,7 @@ export class UserService {
         private readonly userRepository: Repository<UserEntity>
     ){}
 
-    createUser(user: User): Promise<object> {
+    createUser(user: User): Promise<User> {
         return this.userRepository.save(user);
     }
 }

@@ -1,12 +1,30 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { User } from './interfaces/user.interface';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
 describe('UserController', () => {
   let controller: UserController;
 
-  const mockUsersService = {
+  const userExample: User = {
+    id: 10, //put a uuid here
+    firstName: "Jojo",
+    gender: "Male",
+    email: "Jojo@email.com",
+    governmentID: "filepath",
+    phoneNumber: "9856203541",
+    emergencyContact: "2554dsa6232",
+    nationality: "brazilian",
+    birthDate: new Date("1999-06-26"),
 
+  }
+
+  const mockUsersService = {
+    createUser: jest.fn(dto => {
+      return {
+        ...dto
+      }
+    })
   };
 
 
@@ -26,9 +44,18 @@ describe('UserController', () => {
     expect(controller).toBeDefined();
   });
 
-  /*it('should create a user', () => {
-    expect(controller.create({})).toEqual({
-      id: expect.any(Number)
+  it('should create a user', () => {
+    console.log(controller.create(userExample))
+    expect(controller.create(userExample)).toEqual({
+      id: expect.any(Number),
+      birthDate: expect.any(Date),
+      email: expect.stringMatching(userExample.email),
+      emergencyContact: expect.stringMatching(userExample.emergencyContact),
+      firstName: expect.stringMatching(userExample.firstName),
+      gender: expect.stringMatching(userExample.gender),
+      governmentID: expect.stringMatching(userExample.governmentID),
+      nationality: expect.stringMatching(userExample.nationality),
+      phoneNumber: expect.stringMatching(userExample.phoneNumber),
     });
-  });*/
+  })
 });

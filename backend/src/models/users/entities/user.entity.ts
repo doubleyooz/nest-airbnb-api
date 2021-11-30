@@ -43,7 +43,7 @@ import {
     @CreateDateColumn()
     birthDate: Date;  
   
-    @CreateDateColumn()
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;  
             
     @OneToOne(() => AddressEntity)
