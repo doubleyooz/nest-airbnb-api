@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable } from 'rxjs';
+
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import { User } from './interfaces/user.interface';
@@ -12,7 +12,7 @@ export class UserService {
         private readonly userRepository: Repository<UserEntity>
     ){}
 
-    createUser(user: User): Observable<User>{
-        return from(this.userRepository.save(user));
+    createUser(user: User): Promise<object> {
+        return this.userRepository.save(user);
     }
 }
