@@ -12,7 +12,9 @@ import {
   
   @Entity('address')
   export class AddressEntity {
-
+    @PrimaryGeneratedColumn()
+    id: number; //put a uuid here
+    
     @Column({ nullable: false })
     street: string;
 

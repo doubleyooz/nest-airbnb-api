@@ -4,6 +4,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    Index,
     JoinColumn,
     ManyToOne,
     OneToOne,
@@ -22,7 +23,8 @@ import {
 
     @Column()
     gender: string;
-
+    
+    @Index()
     @Column()
     email: string;
 

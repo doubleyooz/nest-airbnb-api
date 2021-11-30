@@ -16,47 +16,47 @@ import {
     @PrimaryGeneratedColumn()
     id: number; //put a uuid here
 
-    @Column()
+    @Column("int")
     placeType: number; 
 
-    @Column()
+    @Column("int")
     description: number; 
 
-    @Column()
+    @Column("int")
     privacy: number;
  
-    @Column()
+    @Column("int")
     guests: number;
 
-    @Column()
+    @Column("int")
     beds: number;
 
-    @Column({ nullable: true })
+    @Column("int", { nullable: true })
     bedrooms: number;
 
-    @Column()
+    @Column("int")
     bathrooms: number;
 
     @Column()
     privateBathrroms: boolean;
 
-    @Column()
-    standoutAmenities: [string];
+    @Column({ array: true })
+    standoutAmenities: string;
     
-    @Column()
-    guestFavorites: [string];
+    @Column({ array: true })
+    guestFavorites: string;
     
-    @Column()
-    safetyItems: [string];
+    @Column({ array: true })
+    safetyItems: string;
 
-    @Column()
-    photos: [string]; //Min(5) 
+    @Column({ array: true })
+    photos: string; //Min(5) 
 
     @Column()
     title: string;
 
-    @Column()
-    highlights: [string]; //Max(2) 
+    @Column({ array: true })
+    highlights: string; //Max(2) 
 
     @Column()
     descriptionText: string;
@@ -64,8 +64,8 @@ import {
     @Column()
     price: number;
 
-    @Column({ length: 3 })
-    odds: [boolean];
+    @Column({ array: true })
+    odds: boolean;
             
     @OneToOne(() => AddressEntity)
     @JoinColumn()
