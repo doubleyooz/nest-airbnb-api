@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './models/users/user.module';
+import { ProfileModule } from './models/profiles/profile.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { UserModule } from './models/users/user.module';
       retryDelay: 2000,
       retryAttempts: 2,
     }),
-    UserModule
+    ProfileModule
   ],
   controllers: [AppController],
   providers: [AppService],

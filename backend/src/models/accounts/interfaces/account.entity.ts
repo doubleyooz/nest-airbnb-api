@@ -10,11 +10,12 @@ import {
     OneToOne,
     PrimaryGeneratedColumn,
   } from 'typeorm';
+import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
   
   //import { UserEntity } from '../../auth/models/user.entity';
   
-  @Entity('user')
-  export class UserEntity {
+  @Entity('account')
+  export class AccountEntity {
     @PrimaryGeneratedColumn()
     id: number; //put a uuid here
   
@@ -22,33 +23,24 @@ import {
     firstName: string;
 
     @Column()
-    gender: string;
+    lastName: string;
     
+    @Column()
+    password: string;
+
     @Index()
     @Column()
     email: string;
-
-    @Column({ nullable: true })
-    governmentID : string;
-
-    @Column()
-    phoneNumber: string;
-
-    @Column({ nullable: true })
-    emergencyContact : string;
-
-    @Column({ nullable: true })
-    nationality : string;
-
+   
     @CreateDateColumn()
     birthDate: Date;  
   
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;  
             
-    @OneToOne(() => AddressEntity)
+    @OneToOne(() => ProfileEntity)
     @JoinColumn()
-    address: AddressEntity;
+    profile: ProfileEntity;
 
     @OneToOne(() => HostEntity)
     @JoinColumn()
