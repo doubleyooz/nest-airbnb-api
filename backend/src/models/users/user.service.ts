@@ -15,4 +15,12 @@ export class UserService {
     createUser(user: User): Promise<User> {
         return this.userRepository.save(user);
     }
+
+    findAllUsers(): Promise<User[]>{
+        return this.userRepository.find();
+    }
+
+    findOneUser(email: string): Promise<User | undefined>{
+        return this.userRepository.findOne({ email });
+    }
 }

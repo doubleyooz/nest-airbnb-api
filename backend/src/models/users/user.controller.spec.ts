@@ -45,7 +45,6 @@ describe('UserController', () => {
   });
 
   it('should create a user', () => {
-    console.log(controller.create(userExample))
     expect(controller.create(userExample)).toEqual({
       id: expect.any(Number),
       birthDate: expect.any(Date),
