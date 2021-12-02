@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateAccountDto } from 'src/authentication/dto/account.dto';
-
-import { Repository } from 'typeorm';
+import { CreateAccountDto, UpdateAccountDTO } from 'src/authentication/dto/account.dto';
+import { Repository, getConnection } from 'typeorm';
 import { AccountEntity } from './entities/account.entity';
 import { Account } from './interfaces/account.interface';
 
@@ -11,31 +10,64 @@ import { Account } from './interfaces/account.interface';
 export class AccountService {
     constructor(
         @InjectRepository(AccountEntity)
-        private readonly accountRepository: Repository<AccountEntity>
+        private readonly _repository: Repository<AccountEntity>
     ) { }
 
-    createAccount(account: CreateAccountDto): Promise<CreateAccountDto> {
-        return this.accountRepository.save(account);
+    async createAccount(account: CreateAccountDto): Promise<CreateAccountDto> {
+        return this._repository.save(account);
     }
 
-    findAllAccounts(): Promise<Account[]> {
-        console.log("Find all")
-        return this.accountRepository.find();
+    async findAllAccounts(): Promise<Account[]> {        
+        return this._repository.find();
     }
 
-    findByEmail(email: string): Promise<Account | undefined> {
-        console.log(`email: ${email}`)
-        return this.accountRepository.findOne({
-            where:
-                { email }
-        });
+    async findByEmail(email: string): Promise<Account|undefined> {          
+        const result: Account = await this._repository.findOne({ email });
+        if (!result) {
+            throw new NotFoundException('User not found or already removed.');
+        }
+        return result;       
+        
     }
 
-    findById(id: number): Promise<Account | undefined> {
-        console.log(`id: ${id}`)
-        return this.accountRepository.findOne({
-            where:
-                { id }
-        });
+    async findById(id: number): Promise<Account|undefined> {      
+        const result: Account = await this._repository.findOne({ id });
+        if (!result) {
+            throw new NotFoundException('User not found or already removed.');
+        }
+        return result;
+        
     }
+
+    async updateById(_id: number, item: UpdateAccountDTO): Promise<Account> {
+        // 1. Se for informado o email, verificar se outro usuário já o possui
+      
+        if (item.email) {
+            const account = this._repository.findOne({
+                where: { email: item.email }
+                
+            });
+            if (account){
+                throw new BadRequestException("Email already in use.");
+            }
+
+        }
+        
+        const result: any = await getConnection()
+            .createQueryBuilder()
+            .update(AccountEntity)
+            .set(item)
+            .where("id = :id", {id: _id})
+            .execute();
+               
+      
+       
+       
+        if (!result) {
+          throw new NotFoundException('Account not found or already removed.');
+        }
+        return result;
+      }
+    
+    
 }

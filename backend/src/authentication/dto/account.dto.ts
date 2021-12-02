@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsDate, IsDefined, IsEmail, IsNotEmpty, IsString, Length, ValidateNested } from "class-validator";
+import { Equals, IsDate, IsDefined, IsEmail, IsInt, IsNotEmpty, IsString, Length, ValidateIf, ValidateNested } from "class-validator";
 //import { IsValidPassword } from "src/common/validators/password.validator";
 import { AddressEntity } from "src/models/addresses/entities/address.entity";
 import { HostEntity } from "src/models/hosts/entities/host.entity";
@@ -33,9 +33,50 @@ export class CreateAccountDto{
   
     @ValidateNested()
     @Type(() => ProfileEntity)
-    profile: ProfileEntity;
+    profileID: ProfileEntity;
     
     @ValidateNested()
     @Type(() => HostEntity)
-    host: HostEntity; 
+    hostID: HostEntity; 
+}
+
+export class UpdateAccountDTO {
+    @ValidateIf((dto) => dto.firstName !== undefined)
+    @IsDefined()
+    @IsString()
+    @IsNotEmpty()   
+    firstName: string;
+
+    @ValidateIf((dto) => dto.lastName !== undefined)
+    @IsDefined()
+    @IsString()
+    @IsNotEmpty()   
+    lastName: string;
+  
+    @ValidateIf((dto) => dto.email !== undefined)
+    @IsDefined()
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail()
+    email: string;
+  
+    @Equals(undefined, {
+      message:
+        'password cannot be updated here, please use the proper endpoint for this operation',
+    })
+    password: string;
+  
+    @ValidateIf((dto) => dto.birthDate !== undefined)
+    @IsDefined()
+    @IsDate()
+    @IsNotEmpty()   
+    birthDate: Date;
+  
+    @Equals(undefined, {
+        message:
+          'createdAt cannot be updated;',
+    })    
+    createdAt: string;
+  
+   
 }

@@ -9,8 +9,8 @@ export interface Account {
     email: string;   
     birthDate: Date;
     createdAt: Date;           
-    profile: ProfileEntity;   
-    host: HostEntity; 
+    profileID: ProfileEntity;   
+    hostID: HostEntity; 
    
     
 }

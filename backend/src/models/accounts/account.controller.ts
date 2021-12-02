@@ -1,33 +1,61 @@
-import { Body, Controller, Get, Param, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+    BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Account } from './interfaces/account.interface';
 import { AccountService } from './account.service';
-import { CreateAccountDto } from 'src/authentication/dto/account.dto';
+import {
+  CreateAccountDto,
+  UpdateAccountDTO,
+} from 'src/authentication/dto/account.dto';
+import { AccountEntity } from './entities/account.entity';
+import { throws } from 'assert';
 
-@Controller('account')
+@Controller('accounts')
 export class AccountController {
-    constructor(private accountService: AccountService) {}
+  constructor(private _service: AccountService) {}
 
-    @Post()
-    @UsePipes(ValidationPipe)
-    create(@Body() account: CreateAccountDto) {
-        return this.accountService.createAccount(account);
-    }
+  @Post()
+  @UsePipes(ValidationPipe)
+  async create(@Body() account: CreateAccountDto): Promise<CreateAccountDto> {
+    return this._service.createAccount(account);
+  }
 
-    @Get()
-    findAll() {
-        return this.accountService.findAllAccounts();
-    }
+ 
+  @Get("find")
+  async findOneById(
+    @Query('id') _id: number,
+    @Query('email') _email: string  
+  ): Promise<Account | undefined> {
 
-    @Get(":email")
-    findOneByEmail(@Param('email') email : string) {
-        console.log(email)
-        return this.accountService.findByEmail(email);
-    }
+    if(_email)
+        return this._service.findByEmail(_email);
 
-    @Get(":id")
-    findOneById(@Param('id') id : number) {
-        console.log(id)
-        return this.accountService.findById(id);
-    }
-    
+    else if(_id)
+        return this._service.findById(_id);
+
+  }
+
+  @Get()
+  async findAll(): Promise<Account[]> {   
+    return this._service.findAllAccounts();
+  }
+
+  
+
+  @Put(':id')
+  async updateById(
+    @Param('id') id: number,
+    @Body() dto: UpdateAccountDTO,
+  ): Promise<object> {
+    return this._service.updateById(id, dto);
+  }
 }

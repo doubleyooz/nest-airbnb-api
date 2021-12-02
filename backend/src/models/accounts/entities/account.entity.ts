@@ -45,9 +45,9 @@ import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
             
     @OneToOne(() => ProfileEntity)
     @JoinColumn()
-    profile: ProfileEntity;
+    profileID: ProfileEntity;
 
     @OneToOne(() => HostEntity)
     @JoinColumn()
-    host: HostEntity; 
+    hostID: HostEntity; 
   }
