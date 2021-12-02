@@ -10,25 +10,18 @@ import {
     OneToOne,
     PrimaryGeneratedColumn,
   } from 'typeorm';
-import { AccountEntity } from 'src/models/accounts/interfaces/account.entity';
+import { AccountEntity } from 'src/models/accounts/entities/account.entity';
   
   //import { UserEntity } from '../../auth/models/user.entity';
   
   @Entity('profile')
   export class ProfileEntity {
     @PrimaryGeneratedColumn()
-    id: number; //put a uuid here
+    id: number; //put a uuid here  
   
     @Column()
-    firstName: string;
-
-    @Column()
-    gender: string;
-    
-    @Index()
-    @Column()
-    email: string;
-
+    gender: string;    
+ 
     @Column({ nullable: true })
     governmentID : string;
 
@@ -40,12 +33,6 @@ import { AccountEntity } from 'src/models/accounts/interfaces/account.entity';
 
     @Column({ nullable: true })
     nationality : string;
-
-    @CreateDateColumn()
-    birthDate: Date;  
-  
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;  
             
     @OneToOne(() => AddressEntity)
     @JoinColumn()

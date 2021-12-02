@@ -15,22 +15,22 @@ import {
     @PrimaryGeneratedColumn()
     id: number; //put a uuid here
     
-    @Column({ nullable: false })
+    @Column()
     street: string;
 
-    @Column()
+    @Column({ nullable: true })
     references: string;
     
-    @Column({ nullable: false })
+    @Column()
     city: string;
   
-    @Column({ nullable: false })
+    @Column()
     state: string;
      
-    @Column({ nullable: false })
+    @Column()
     zipCode: string;
 
-    @Column({ nullable: false })
+    @Column()
     country: string;
  
   }

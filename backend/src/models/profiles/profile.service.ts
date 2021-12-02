@@ -12,7 +12,7 @@ export class ProfileService {
         private readonly profileRepository: Repository<ProfileEntity>
     ){}
 
-    createUser(profile: Profile): Promise<Profile> {
+    createProfile(profile: Profile): Promise<Profile> {
         return this.profileRepository.save(profile);
     }
 
@@ -20,7 +20,7 @@ export class ProfileService {
         return this.profileRepository.find();
     }
 
-    findOneProfile(email: string): Promise<Profile | undefined>{
-        return this.profileRepository.findOne({ email });
+    findOneProfile(id: number): Promise<Profile | undefined>{
+        return this.profileRepository.findOne({ id });
     }
 }

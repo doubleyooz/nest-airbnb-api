@@ -1,23 +1,23 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { User } from './interfaces/profile.interface';
-import { ProfileController } from './profile.service';
+import { Profile } from './interfaces/profile.interface';
+import { ProfileService } from './profile.service';
 
-@Controller('user')
+@Controller('profile')
 export class ProfileController {
-    constructor(private profileController: ProfileController) {}
+    constructor(private profileService: ProfileService) {}
 
     @Post()
-    create(@Body() user: User) {
-        return this.profileController.createUser(user);
+    create(@Body() profile: Profile) {
+        return this.profileService.createProfile(profile);
     }
 
     @Get()
     findAll() {
-        return this.profileController.findAllUsers();
+        return this.profileService.findAllProfiles();
     }
 
     @Get("findOne")
-    findOne(@Query("firstName") key) {
-        return this.profileController.findOneUser(key);
+    findOne(@Query("id") key) {
+        return this.profileService.findOneProfile(key);
     }
 }
