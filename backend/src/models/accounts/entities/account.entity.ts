@@ -1,6 +1,7 @@
-import { AddressEntity } from '../../addresses/entities/address.entity';
+import * as bcrypt from 'bcrypt';
 import { HostEntity } from '../../hosts/entities/host.entity';
 import {
+  BeforeInsert,
     Column,
     CreateDateColumn,
     Entity,
@@ -25,6 +26,10 @@ import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
     @Column()
     lastName: string;
     
+    @BeforeInsert()
+    async hashPassword() {
+       this.password = await bcrypt.hash(this.password, Number(process.env.HASH_SALT));
+    }
     @Column({ select: false })
     password: string;
 
