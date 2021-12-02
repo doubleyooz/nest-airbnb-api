@@ -25,11 +25,11 @@ import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
     @Column()
     lastName: string;
     
-    @Column()
+    @Column({ select: false })
     password: string;
 
     @Index()
-    @Column()
+    @Column({ unique: true })
     email: string;
    
     @CreateDateColumn()

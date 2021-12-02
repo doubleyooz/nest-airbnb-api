@@ -1,7 +1,9 @@
+import { Type } from "class-transformer";
 import { IsDate, IsDefined, IsEmail, IsNotEmpty, IsString, Length, ValidateNested } from "class-validator";
-import { IsValidPassword } from "src/common/validators/is.valid.password";
+//import { IsValidPassword } from "src/common/validators/password.validator";
 import { AddressEntity } from "src/models/addresses/entities/address.entity";
 import { HostEntity } from "src/models/hosts/entities/host.entity";
+import { ProfileEntity } from "src/models/profiles/entities/profile.entity";
 
 export class CreateAccountDto{  
     @IsDefined()
@@ -28,13 +30,12 @@ export class CreateAccountDto{
     @Length(8)     
     //@IsValidPassword()
     password: string;
-
-
-    @IsDefined() 
-    @IsNotEmpty()    
+  
     @ValidateNested()
-    address: AddressEntity;
+    @Type(() => ProfileEntity)
+    profile: ProfileEntity;
     
     @ValidateNested()
+    @Type(() => HostEntity)
     host: HostEntity; 
 }
