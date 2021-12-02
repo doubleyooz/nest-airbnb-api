@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AccountModule } from './models/accounts/account.module';
 import { ProfileModule } from './models/profiles/profile.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { ProfileModule } from './models/profiles/profile.module';
       retryDelay: 2000,
       retryAttempts: 2,
     }),
+    AccountModule,
     ProfileModule
   ],
   controllers: [AppController],
