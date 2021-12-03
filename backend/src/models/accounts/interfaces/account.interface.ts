@@ -6,9 +6,7 @@ export interface Account {
     lastName: string;  
     password: string;   
     email: string;   
-    birthDate: Date;             
-    profileID: ProfileEntity;   
-    hostID: HostEntity; 
+    birthDate: Date;            
    
     
 }

@@ -1,7 +1,7 @@
 import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateAccountDto, UpdateAccountDTO } from 'src/authentication/dto/account.dto';
-import { Repository, getConnection, DeleteResult, DeepPartial } from 'typeorm';
+import { Repository, getConnection, DeleteResult, DeepPartial, InsertResult } from 'typeorm';
 import { AccountEntity } from './entities/account.entity';
 import { Account } from './interfaces/account.interface';
 
@@ -13,10 +13,15 @@ export class AccountService {
         private readonly _repository: Repository<AccountEntity>
     ) { }
 
-    async createAccount(attributes: Account) {
+    async createAccount(attributes: Account): Promise<Account> {
+        console.log(attributes)
+        
         const entity = Object.assign(new AccountEntity(), attributes);
-        return this._repository.save(entity);
+        const result: Account = await this._repository.save(entity);
+        console.log(result)
+        return result;
     }
+
     async findAllAccounts(): Promise<Account[]> {        
         return this._repository.find();
     }

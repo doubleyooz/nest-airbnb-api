@@ -12,11 +12,12 @@ import {
     PrimaryGeneratedColumn,
   } from 'typeorm';
 import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
+import { Account } from '../interfaces/account.interface';
   
   //import { UserEntity } from '../../auth/models/user.entity';
   
   @Entity('account')
-  export class AccountEntity {
+  export class AccountEntity{
     @PrimaryGeneratedColumn('increment')
     id: number;
   
@@ -28,7 +29,9 @@ import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
     
     @BeforeInsert()
     async hashPassword() {
+       console.log(`rounds=${process.env.HASH_SALT}; hashing password...`)
        this.password = await bcrypt.hash(this.password, Number(process.env.HASH_SALT));
+       console.log("password hashed...")
     }
     @Column({ select: false })
     password: string;
