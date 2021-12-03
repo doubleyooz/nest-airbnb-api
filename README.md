@@ -1,4 +1,4 @@
-# AirBnb-CLone
+# AirBnb-Clone
 { NestJs, ReactJs }
 
 Aiming to recreate most of the basics functionalities and appearances of https://www.airbnb.com

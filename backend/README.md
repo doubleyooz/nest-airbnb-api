@@ -1,31 +1,36 @@
-Personally, I've never used Airbnb, so the description I am making here may not be the most accuraty one, feel free to give me tips on how to improve
+Personally, I've never used Airbnb, so the description I am making here may not be the most accurate one, feel free to give me tips on how to improve
+
+signin/signup {Google, Facebook}
 
 Account {  
-  user : User, (Required)  
+  firstName : string, (Required)  
+  lastName : string, (Required)  
+  email: string, (Required)  
+  birthDate : Date, (Required)  
+  password: string, (Required)  //Airbnb doesn't require one  
+ 
   linkedAccounts : [string], (Required)  
   deviceHistory : [device], (Required)  
   paymentMethods : [payments], (Required)  
+
+  profile : Profile, (Required) (Nullable)  
+  hostingId : string, (Required) (Nullable)  
   active : boolean (Required)  
 
 }  
-User {  
-  firstName : string, (Required)  
+Profile {    
   gender : string, (Required)  
-  birthDate : Date, (Required)  
-  email: string, (Required)  
   governmentID : string,  
   phoneNumber: string, (Required)  
   emergencyContact: string,  
   nationality : string,  
-  address : Address  
-  hostingId : string,  
+  address : Address     
 }
 
-Host{
+Host{  
   placeType : number, (Required)  
   description : number, (Required)  
   privacy : number, (Required)  
-  address: Address, (Required)  
   guests : number, (Required, NotNullable)  
   beds : number, (Required, NotNullable)  
   bedrooms : number, (Required)  
@@ -40,6 +45,8 @@ Host{
   description: string, (Required)  
   price: number, (Required)  
   odds: [boolean], (Required, lenght(3))  
+
+  address: Address, (Required)  
 }  
 
 Address {  
