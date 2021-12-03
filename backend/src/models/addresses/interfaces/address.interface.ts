@@ -1,6 +1,4 @@
-export interface Address {
-
-    id: number;
+export interface Address {   
     street: string;
     references?: string;
     city: string;

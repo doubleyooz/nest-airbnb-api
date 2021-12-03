@@ -17,8 +17,8 @@ import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
   
   @Entity('account')
   export class AccountEntity {
-    @PrimaryGeneratedColumn()
-    id: number; //put a uuid here
+    @PrimaryGeneratedColumn('increment')
+    id: number;
   
     @Column()
     firstName: string;
@@ -36,7 +36,12 @@ import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
     @Index()
     @Column({ unique: true })
     email: string;
-   
+
+    @BeforeInsert()
+    async dateToString() {
+      if(typeof this.birthDate === "string")
+       this.birthDate = new Date(this.birthDate)
+    }
     @CreateDateColumn()
     birthDate: Date;  
   

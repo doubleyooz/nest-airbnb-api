@@ -1,13 +1,12 @@
 import { Address } from "src/models/addresses/interfaces/address.interface";
 
-export interface Profile {
-    id: number; //put a uuid here      
+export interface Profile {   
     gender: string;      
     governmentID? : string;
     phoneNumber: string;
     emergencyContact? : string;    
     nationality? : string;
-    address : Address
+   
    
    
     

@@ -31,6 +31,14 @@ export class CreateAccountDto{
     //@IsValidPassword()
     password: string;
   
+    @IsDefined()
+    @IsDate()
+    @IsNotEmpty()
+    @Length(8)     
+    //@IsValidPassword()
+    birthDate: Date;
+  
+
     @ValidateNested()
     @Type(() => ProfileEntity)
     profileID: ProfileEntity;

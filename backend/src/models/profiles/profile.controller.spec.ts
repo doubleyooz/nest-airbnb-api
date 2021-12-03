@@ -7,15 +7,13 @@ describe('ProfileController', () => {
   let controller: ProfileController;
 
   const profileExample: Profile = {
-    id: 10, //put a uuid here
-    firstName: "Jojo",
-    gender: "Male",
-    email: "Jojo@email.com",
+   
+    gender: "Male",   
     governmentID: "filepath",
     phoneNumber: "9856203541",
     emergencyContact: "2554dsa6232",
     nationality: "brazilian",
-    birthDate: new Date("1999-06-26"),
+   
 
   }
 
@@ -45,12 +43,8 @@ describe('ProfileController', () => {
   });
 
   it('should create a profile', () => {
-    expect(controller.create(profileExample)).toEqual({
-      id: expect.any(Number),
-      birthDate: expect.any(Date),
-      email: expect.stringMatching(profileExample.email),
-      emergencyContact: expect.stringMatching(profileExample.emergencyContact),
-      firstName: expect.stringMatching(profileExample.firstName),
+    expect(controller.create(profileExample)).toEqual({    
+      emergencyContact: expect.stringMatching(profileExample.emergencyContact),    
       gender: expect.stringMatching(profileExample.gender),
       governmentID: expect.stringMatching(profileExample.governmentID),
       nationality: expect.stringMatching(profileExample.nationality),

@@ -16,7 +16,7 @@ import { AccountEntity } from 'src/models/accounts/entities/account.entity';
   
   @Entity('profile')
   export class ProfileEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number; //put a uuid here  
   
     @Column()
