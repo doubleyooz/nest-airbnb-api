@@ -1,7 +1,8 @@
 import {
-    BadRequestException,
+  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -21,35 +22,37 @@ import { throws } from 'assert';
 
 @Controller('accounts')
 export class AccountController {
-  constructor(private _service: AccountService) {}
+  constructor(private _service: AccountService) { }
 
   @Post()
   @UsePipes(ValidationPipe)
   async create(@Body() account: CreateAccountDto): Promise<CreateAccountDto> {
+    console.log(account)
+   
     return this._service.createAccount(account);
   }
 
- 
+
   @Get("find")
   async findOneById(
     @Query('id') _id: number,
-    @Query('email') _email: string  
+    @Query('email') _email: string
   ): Promise<Account | undefined> {
 
-    if(_email)
-        return this._service.findByEmail(_email);
+    if (_email)
+      return this._service.findByEmail(_email);
 
-    else if(_id)
-        return this._service.findById(_id);
+    else if (_id)
+      return this._service.findById(_id);
 
   }
 
   @Get()
-  async findAll(): Promise<Account[]> {   
+  async findAll(): Promise<Account[]> {
     return this._service.findAllAccounts();
   }
 
-  
+
 
   @Put(':id')
   async updateById(
@@ -57,5 +60,13 @@ export class AccountController {
     @Body() dto: UpdateAccountDTO,
   ): Promise<object> {
     return this._service.updateById(id, dto);
+  }
+
+
+  @Delete(':id')
+  async delete(
+    @Param('id') id: number,
+  ): Promise<object> {
+    return this._service.deleteById(id);
   }
 }

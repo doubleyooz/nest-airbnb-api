@@ -1,7 +1,7 @@
 import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateAccountDto, UpdateAccountDTO } from 'src/authentication/dto/account.dto';
-import { Repository, getConnection } from 'typeorm';
+import { Repository, getConnection, DeleteResult, DeepPartial } from 'typeorm';
 import { AccountEntity } from './entities/account.entity';
 import { Account } from './interfaces/account.interface';
 
@@ -13,10 +13,10 @@ export class AccountService {
         private readonly _repository: Repository<AccountEntity>
     ) { }
 
-    async createAccount(account: CreateAccountDto): Promise<CreateAccountDto> {
-        return this._repository.save(account);
+    async createAccount(attributes: Account) {
+        const entity = Object.assign(new AccountEntity(), attributes);
+        return this._repository.save(entity);
     }
-
     async findAllAccounts(): Promise<Account[]> {        
         return this._repository.find();
     }
@@ -50,7 +50,6 @@ export class AccountService {
             if (account){
                 throw new BadRequestException("Email already in use.");
             }
-
         }
         
         const result: any = await getConnection()
@@ -58,16 +57,17 @@ export class AccountService {
             .update(AccountEntity)
             .set(item)
             .where("id = :id", {id: _id})
-            .execute();
-               
-      
+            .execute();     
        
        
         if (!result) {
           throw new NotFoundException('Account not found or already removed.');
         }
         return result;
-      }
+    }
     
+    async deleteById(_id: number): Promise<DeleteResult> {
+        return this._repository.delete({id: _id});
+    }
     
 }
