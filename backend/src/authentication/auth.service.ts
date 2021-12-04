@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { AccountService } from "src/models/accounts/account.service";
 import { AccountEntity } from "src/models/accounts/entities/account.entity";
 import { getRepository } from "typeorm";
-import { SignInDto } from './dto/auth.dto';
+import { PayloadDto, SignInDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -43,5 +43,15 @@ export class AuthService {
 
     }
 
+    async validateTokenVersion(payload: PayloadDto){
+        const account = await getRepository(AccountEntity)
+            .createQueryBuilder()
+            .from(AccountEntity, "account")
+            .where("account.id = :id", { id: payload.id })
+            .andWhere("account.tokenVersion = :tokenVersion", { tokenVersion: payload.tokenVersion })
+            .getOne();
 
+        return account !== undefined;
+        
+    }
 }

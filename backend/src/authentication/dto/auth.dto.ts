@@ -17,3 +17,16 @@ export class SignInDto {
     password: string;
   
 }
+
+export class PayloadDto {  
+    
+         
+    @IsDefined()    
+    @IsNotEmpty()  
+    id: number;
+
+    @IsDefined()   
+    @IsNotEmpty()   
+    tokenVersion: number;
+  
+}
