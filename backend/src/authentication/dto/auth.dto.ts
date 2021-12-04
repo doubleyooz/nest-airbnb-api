@@ -7,14 +7,14 @@ export class SignInDto {
     @IsString()
     @IsNotEmpty()    
     @IsEmail()
-    email: string;
+    readonly email: string;
 
     @IsDefined()
     @IsString()
     @IsNotEmpty()
     @Length(8)     
     //@IsValidPassword()
-    password: string;
+    readonly password: string;
   
 }
 

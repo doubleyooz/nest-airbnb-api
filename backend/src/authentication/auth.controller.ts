@@ -12,19 +12,19 @@ import {
     UsePipes,
     ValidationPipe,
   } from '@nestjs/common';
-import { LocalAuthGuard } from 'src/common/guards/local-auth.guard';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { AuthService } from './auth.service';
 
 import { SignInDto } from './dto/auth.dto';
   
-  @Controller()
+  @Controller("auth")
   export class AuthController {
-    constructor(private _service: AuthService) { }
+    constructor(private readonly _service: AuthService) {}
   
-    @UseGuards(LocalAuthGuard)
-    @Post("signin")    
+   
+    @Post()    
     async signin(@Body() payload: SignInDto): Promise<SignInDto> {   
-     
+      console.log("controller")
       return this._service.validateAccount(payload);
     }
   

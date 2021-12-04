@@ -3,12 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './authentication/auth.module';
 import { AccountModule } from './models/accounts/account.module';
 import { ProfileModule } from './models/profiles/profile.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRE_HOST,
@@ -21,6 +22,7 @@ import { ProfileModule } from './models/profiles/profile.module';
       retryDelay: 2000,
       retryAttempts: 2,
     }),
+    AuthModule,
     AccountModule,
     ProfileModule
   ],
