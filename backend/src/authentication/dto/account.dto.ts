@@ -1,8 +1,6 @@
 import { Type } from "class-transformer";
-import { Equals, IsDate, IsDefined, IsEmail, IsInt, IsNotEmpty, IsString, Length, ValidateIf, ValidateNested } from "class-validator";
-//import { IsValidPassword } from "src/common/validators/password.validator";
-import { HostEntity } from "src/models/hosts/entities/host.entity";
-import { ProfileEntity } from "src/models/profiles/entities/profile.entity";
+import { Equals, IsDate, IsDefined, IsEmail, IsNotEmpty, IsString, Length, MaxDate, ValidateIf } from "class-validator";
+import { subYears } from "date-fns";
 
 export class CreateAccountDto {  
     
@@ -35,7 +33,7 @@ export class CreateAccountDto {
     @IsDate()
     @Type(() => Date)
     @IsNotEmpty()    
-    //@IsValidPassword()
+    @MaxDate(subYears(new Date(), 18), { message: 'Guests under the age of 18 are not allowed to create an Airbnb account or book a rental for themselves',})
     birthDate: Date;
 }
 
@@ -79,3 +77,4 @@ export class UpdateAccountDTO {
   
    
 }
+
