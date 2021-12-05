@@ -1,4 +1,5 @@
 import { AddressEntity } from '../../addresses/entities/address.entity';
+import { AccountEntity } from '../../accounts/entities/account.entity';
 import { HostEntity } from '../../hosts/entities/host.entity';
 import {
     Column,
@@ -10,7 +11,7 @@ import {
     OneToOne,
     PrimaryGeneratedColumn,
   } from 'typeorm';
-import { AccountEntity } from 'src/models/accounts/entities/account.entity';
+
   
   //import { UserEntity } from '../../auth/models/user.entity';
   

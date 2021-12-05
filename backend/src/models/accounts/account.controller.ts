@@ -16,7 +16,7 @@ import { AccountService } from './account.service';
 import {
   CreateAccountDto,
   UpdateAccountDTO,
-} from 'src/authentication/dto/account.dto';
+} from '../../authentication/dto/account.dto';
 import { AccountEntity } from './entities/account.entity';
 import { throws } from 'assert';
 import { InsertResult } from 'typeorm';
@@ -27,8 +27,8 @@ export class AccountController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async create(@Body() account: CreateAccountDto): Promise<Account> {   
-   
+  async create(@Body() account: CreateAccountDto): Promise<Account> {
+
     return this._service.createAccount(account);
   }
 

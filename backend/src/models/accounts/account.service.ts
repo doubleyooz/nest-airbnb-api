@@ -14,11 +14,9 @@ export class AccountService {
     ) { }
 
     async createAccount(attributes: Account): Promise<Account> {
-        console.log(attributes)
-        
         const entity = Object.assign(new AccountEntity(), attributes);
         const result: Account = await this._repository.save(entity);
-        console.log(result)
+       
         return result;
     }
 

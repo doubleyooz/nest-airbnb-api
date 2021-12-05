@@ -1,4 +1,5 @@
 import * as bcrypt from 'bcrypt';
+import { ProfileEntity } from '../../profiles/entities/profile.entity';
 import { HostEntity } from '../../hosts/entities/host.entity';
 import {
   BeforeInsert,
@@ -11,7 +12,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ProfileEntity } from 'src/models/profiles/entities/profile.entity';
+
 
 
 
