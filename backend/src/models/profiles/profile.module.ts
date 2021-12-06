@@ -7,8 +7,10 @@ import { ProfileEntity } from './entities/profile.entity';
 import { HostEntity } from '../hosts/entities/host.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProfileEntity, AddressEntity, HostEntity])],
-  providers: [ProfileService],
-  controllers:[ProfileController]
+    imports: [
+        TypeOrmModule.forFeature([ProfileEntity, AddressEntity, HostEntity]),
+    ],
+    providers: [ProfileService],
+    controllers: [ProfileController],
 })
 export class ProfileModule {}

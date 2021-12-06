@@ -3,25 +3,23 @@ import { ProfileController } from './profile.controller';
 import { ProfileService } from './profile.service';
 
 describe('ProfileService', () => {
-  let service: ProfileService;
+    let service: ProfileService;
 
-  const mockUsersService = {
+    const mockUsersService = {};
 
-  };
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            controllers: [ProfileController],
+            providers: [ProfileService],
+        })
+            .overrideProvider(ProfileService)
+            .useValue(mockUsersService)
+            .compile();
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [ProfileController],
-      providers: [ProfileService],
-    })
-      .overrideProvider(ProfileService)
-      .useValue(mockUsersService)
-      .compile();
+        service = module.get<ProfileService>(ProfileService);
+    });
 
-    service = module.get<ProfileService>(ProfileService);
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(service).toBeDefined();
+    });
 });

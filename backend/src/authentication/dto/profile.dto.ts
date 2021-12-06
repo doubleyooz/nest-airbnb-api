@@ -1,37 +1,43 @@
-import { Type } from "class-transformer";
-import { IsDate, IsDefined, IsEmail, IsNotEmpty, IsString, Length, ValidateNested } from "class-validator";
-import { AddressEntity } from "src/models/addresses/entities/address.entity";
-import { HostEntity } from "src/models/hosts/entities/host.entity";
+import { Type } from 'class-transformer';
+import {
+    IsDate,
+    IsDefined,
+    IsEmail,
+    IsNotEmpty,
+    IsString,
+    Length,
+    ValidateNested,
+} from 'class-validator';
+import { AddressEntity } from 'src/models/addresses/entities/address.entity';
+import { HostEntity } from 'src/models/hosts/entities/host.entity';
 
-export class CreateProfileDto{  
-   
+export class CreateProfileDto {
     @IsDefined()
-    @IsString()    
+    @IsString()
     @IsNotEmpty()
     gender: string;
 
- 
-    @IsString()      
-    governmentID : string;
+    @IsString()
+    governmentID: string;
 
     @IsDefined()
-    @IsString()       
+    @IsString()
     @IsNotEmpty()
     phoneNumber: string;
-  
-    @IsString()        
-    emergencyContact : string;
 
     @IsString()
-    nationality : string;
+    emergencyContact: string;
 
-    @IsDefined() 
-    @IsNotEmpty()    
+    @IsString()
+    nationality: string;
+
+    @IsDefined()
+    @IsNotEmpty()
     @ValidateNested()
     @Type(() => AddressEntity)
     address: AddressEntity;
-    
+
     @ValidateNested()
     @Type(() => HostEntity)
-    host: HostEntity; 
+    host: HostEntity;
 }

@@ -7,34 +7,34 @@ import {
     ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
-  } from 'typeorm';
-  
-  //import { UserEntity } from '../../auth/models/user.entity';
-  
-  @Entity('host')
-  export class HostEntity {
+} from 'typeorm';
+
+//import { UserEntity } from '../../auth/models/user.entity';
+
+@Entity('host')
+export class HostEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Column("int")
-    placeType: number; 
+    @Column('int')
+    placeType: number;
 
-    @Column("int")
-    description: number; 
+    @Column('int')
+    description: number;
 
-    @Column("int")
+    @Column('int')
     privacy: number;
- 
-    @Column("int")
+
+    @Column('int')
     guests: number;
 
-    @Column("int")
+    @Column('int')
     beds: number;
 
-    @Column("int", { nullable: true })
+    @Column('int', { nullable: true })
     bedrooms: number;
 
-    @Column("int")
+    @Column('int')
     bathrooms: number;
 
     @Column()
@@ -42,21 +42,21 @@ import {
 
     @Column({ array: true })
     standoutAmenities: string;
-    
+
     @Column({ array: true })
     guestFavorites: string;
-    
+
     @Column({ array: true })
     safetyItems: string;
 
     @Column({ array: true })
-    photos: string; //Min(5) 
+    photos: string; //Min(5)
 
     @Column()
     title: string;
 
     @Column({ array: true })
-    highlights: string; //Max(2) 
+    highlights: string; //Max(2)
 
     @Column()
     descriptionText: string;
@@ -66,10 +66,8 @@ import {
 
     @Column({ array: true })
     odds: boolean;
-            
+
     @OneToOne(() => AddressEntity)
     @JoinColumn()
     address: AddressEntity;
-
-
-  }
+}

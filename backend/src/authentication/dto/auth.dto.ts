@@ -1,32 +1,32 @@
-import { IsDefined, IsEmail, IsNotEmpty, IsString, Length } from "class-validator";
+import {
+    IsDefined,
+    IsEmail,
+    IsNotEmpty,
+    IsString,
+    Length,
+} from 'class-validator';
 
-export class SignInDto {  
-    
-         
+export class SignInDto {
     @IsDefined()
     @IsString()
-    @IsNotEmpty()    
+    @IsNotEmpty()
     @IsEmail()
     readonly email: string;
 
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    @Length(8)     
+    @Length(8)
     //@IsValidPassword()
     readonly password: string;
-  
 }
 
-export class PayloadDto {  
-    
-         
-    @IsDefined()    
-    @IsNotEmpty()  
+export class PayloadDto {
+    @IsDefined()
+    @IsNotEmpty()
     id: number;
 
-    @IsDefined()   
-    @IsNotEmpty()   
+    @IsDefined()
+    @IsNotEmpty()
     tokenVersion: number;
-  
 }

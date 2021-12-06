@@ -16,8 +16,8 @@ export class ProfileController {
         return this.profileService.findAllProfiles();
     }
 
-    @Get("findOne")
-    findOne(@Query("id") key) {
+    @Get('findOne')
+    findOne(@Query('id') key) {
         return this.profileService.findOneProfile(key);
     }
 }

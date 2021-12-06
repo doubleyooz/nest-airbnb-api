@@ -10,16 +10,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from 'src/models/accounts/entities/account.entity';
 
 @Module({
-  imports: [
-    AccountModule,
-    JwtModule.register({
-      secret: process.env.JWT_SIGNIN,
-      signOptions: { expiresIn: "1200s" }
-    }),
-    PassportModule,
-    TypeOrmModule.forFeature([AccountEntity])],
-  controllers: [AuthController],
-  providers: [AccountService, AuthService, JwtStrategy]
-
+    imports: [
+        AccountModule,
+        JwtModule.register({
+            secret: process.env.JWT_SIGNIN,
+            signOptions: { expiresIn: '1200s' },
+        }),
+        PassportModule,
+        TypeOrmModule.forFeature([AccountEntity]),
+    ],
+    controllers: [AuthController],
+    providers: [AccountService, AuthService, JwtStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}

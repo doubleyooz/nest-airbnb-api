@@ -9,18 +9,18 @@ import { Profile } from './interfaces/profile.interface';
 export class ProfileService {
     constructor(
         @InjectRepository(ProfileEntity)
-        private readonly profileRepository: Repository<ProfileEntity>
-    ){}
+        private readonly profileRepository: Repository<ProfileEntity>,
+    ) {}
 
     createProfile(profile: Profile): Promise<Profile> {
         return this.profileRepository.save(profile);
     }
 
-    findAllProfiles(): Promise<Profile[]>{
+    findAllProfiles(): Promise<Profile[]> {
         return this.profileRepository.find();
     }
 
-    findOneProfile(id: number): Promise<Profile | undefined>{
+    findOneProfile(id: number): Promise<Profile | undefined> {
         return this.profileRepository.findOne({ id });
     }
 }
