@@ -34,7 +34,7 @@ export class AccountController {
 
 
   @Get("find")
-  async findOneById(
+  async findOne(
     @Query('id') _id: number,
     @Query('email') _email: string
   ): Promise<Account | undefined> {

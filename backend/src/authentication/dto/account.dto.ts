@@ -69,12 +69,7 @@ export class UpdateAccountDTO {
     @IsDate()
     @IsNotEmpty()   
     birthDate: Date;
-  
-    @Equals(undefined, {
-        message:
-          'createdAt cannot be updated;',
-    })    
-    createdAt: string;
+     
   
    
 }
