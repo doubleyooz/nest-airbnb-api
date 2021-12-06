@@ -20,6 +20,7 @@ import {
 import { AccountEntity } from './entities/account.entity';
 import { throws } from 'assert';
 import { InsertResult } from 'typeorm';
+import { ValidatePayloadExistsPipe } from 'src/common/pipes/payload.exists.pipe';
 
 @Controller('accounts')
 export class AccountController {
@@ -47,7 +48,7 @@ export class AccountController {
 
     @Put(':id')
     async updateById(
-        @Param('id') id: number,
+        @Param('id', new ValidatePayloadExistsPipe()) id: number,
         @Body() dto: UpdateAccountDTO,
     ): Promise<object> {
         return this._service.updateById(id, dto);
