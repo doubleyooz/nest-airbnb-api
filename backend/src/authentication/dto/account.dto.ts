@@ -53,12 +53,14 @@ export class UpdateAccountDTO {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
+    @Length(3, 20)
     firstName: string;
 
     @ValidateIf((dto) => dto.lastName !== undefined)
     @IsDefined()
     @IsString()
     @IsNotEmpty()
+    @Length(2, 20)
     lastName: string;
 
     @ValidateIf((dto) => dto.email !== undefined)
@@ -75,9 +77,12 @@ export class UpdateAccountDTO {
     })
     password: string;
 
-    @ValidateIf((dto) => dto.birthDate !== undefined)
+    // prettier-ignore
+    @ValidateIf((dto) => dto.birthDate !== undefined)    
     @IsDefined()
     @IsDate()
-    @IsNotEmpty()
+    @Type(() => Date)
+    @IsNotEmpty()     
+    @MaxDate(subYears(new Date(), 18), { message: 'Guests under the age of 18 are not allowed to create an Airbnb account or book a rental for themselves',})
     birthDate: Date;
 }
