@@ -27,6 +27,12 @@ describe('AccountController', () => {
 
     }
 
+    const temp1 = {...accountExample};
+    const temp2 = {...accountExample2};
+    delete temp1.password
+    delete temp2.password
+
+
     const mockAccountService = {
         createAccount: jest.fn(async (dto) => {
             delete dto.password
@@ -36,10 +42,8 @@ describe('AccountController', () => {
             }
         }),
         findAllAccounts: jest.fn(async () => {
-            const temp = accountExample;
-            delete temp.password;
 
-            return [{ id: 1, ...temp }]
+            return [{ id: 1, ...temp1 }, { id: 2, ...temp2 }]
         }),
 
         findById: jest.fn(async (_id: number) => {
@@ -59,21 +63,17 @@ describe('AccountController', () => {
             else return undefined;
         }),
         updateById: jest.fn(async (_id: number, item: UpdateAccountDTO) => {
-
-            if (item.email) {
-
-                if (item.email === accountExample.email) {
-                    throw new BadRequestException("Email already in use.");
-                }
+            if (item.email === accountExample.email) {
+                throw new BadRequestException("Email already in use.");
             }
+
 
             if (!(_id === 5 || _id === 6)) {
                 throw new NotFoundException('Account not found or already removed.');
             }
 
-            const temp = accountExample2;
-            delete temp.password;
-            return [{ id: _id, ...temp }];
+         
+            return [{ id: _id, ...temp1 }];
         }),
 
         deleteById: jest.fn(async (_id: number) => {
@@ -105,8 +105,8 @@ describe('AccountController', () => {
     });
 
     it('should create an account', async () => {
-        const temp = { ...accountExample };
-        expect(await controller.create(temp)).toEqual({
+
+        expect(await controller.create(accountExample)).toEqual({
             id: expect.any(Number),
             firstName: accountExample.firstName,
             lastName: accountExample.lastName,
@@ -114,17 +114,11 @@ describe('AccountController', () => {
             birthDate: accountExample.birthDate,
         });
 
-        expect(mockAccountService.createAccount).toBeCalledWith(temp);
+        expect(mockAccountService.createAccount).toBeCalledWith(accountExample);
     })
 
     it('should list all accounts', async () => {
-        expect(await controller.findAll()).toEqual([{
-            id: expect.any(Number),
-            firstName: accountExample.firstName,
-            lastName: accountExample.lastName,
-            email: accountExample.email,
-            birthDate: accountExample.birthDate,
-        }]);
+        expect(await controller.findAll()).toEqual([{ id: 1, ...temp1 }, { id: 2, ...temp2 }]);
 
         expect(mockAccountService.findAllAccounts).toBeCalledWith();
     })
@@ -142,37 +136,35 @@ describe('AccountController', () => {
     })
 
     it('should update an account', async () => {
-        let temp = accountExample2;
-        delete temp.password;
-        expect(await controller.updateById(5, temp)).toEqual([{
+        temp1.email = "Mama@gmail.com";
+
+        expect(await controller.updateById(5, temp1)).toEqual([{
             id: expect.any(Number),
-            firstName: temp.firstName,
-            lastName: temp.lastName,
-            email: temp.email,
-            birthDate: temp.birthDate,
+            firstName: temp1.firstName,
+            lastName: temp1.lastName,
+            email: temp1.email,
+            birthDate: temp1.birthDate,
         }]);
 
         try {
-            expect(await controller.updateById(10, temp)).toThrow(NotFoundException);
+            expect(await controller.updateById(10, temp1)).toThrow(NotFoundException);
             // Fail test if above expression doesn't throw anything.
             expect(true).toBe(false);
         } catch (e) {
             expect(e.message).toBe('Account not found or already removed.');
         }
         try {
-            temp.email = accountExample.email;
-            expect(await controller.updateById(5, temp)).toThrow(BadRequestException);
+            temp1.email = accountExample.email;
+            expect(await controller.updateById(5, temp1)).toThrow(BadRequestException);
             // Fail test if above expression doesn't throw anything.
             expect(true).toBe(false);
         } catch (e) {
             expect(e.message).toBe("Email already in use.");
         }
-        expect(mockAccountService.updateById).toBeCalledWith(5, temp);
+        expect(mockAccountService.updateById).toBeCalledWith(5, temp1);
     })
 
     it('should delete an account', async () => {
-        let temp = accountExample2;
-        delete temp.password;
         expect(await controller.delete(5)).toEqual({
             "raw": [],
             "affected": 1
