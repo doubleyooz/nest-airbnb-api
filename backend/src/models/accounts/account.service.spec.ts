@@ -4,7 +4,7 @@ import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
 import {
     CreateAccountDto,
-    UpdateAccountDTO,
+    UpdateAccountDto,
 } from '../../authentication/dto/account.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { getRepositoryToken } from '@nestjs/typeorm';
@@ -64,7 +64,7 @@ describe('AccountService', () => {
         }),
         updateById: jest
             .fn()
-            .mockImplementation((_id: number, item: UpdateAccountDTO) => {
+            .mockImplementation((_id: number, item: UpdateAccountDto) => {
                 temp1.email = 'Mama@gmail.com';
 
                 const result =

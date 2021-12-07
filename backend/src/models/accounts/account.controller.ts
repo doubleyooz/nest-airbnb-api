@@ -8,6 +8,7 @@ import {
     Post,
     Put,
     Query,
+    UseGuards,
     UsePipes,
     ValidationPipe,
 } from '@nestjs/common';
@@ -15,17 +16,21 @@ import { Account } from './interfaces/account.interface';
 import { AccountService } from './account.service';
 import {
     CreateAccountDto,
-    UpdateAccountDTO,
+    UpdateAccountDto,
 } from '../../authentication/dto/account.dto';
-
-import { ValidatePayloadExistsPipe } from 'src/common/pipes/payload.exists.pipe';
+import { PayloadGuard } from 'src/common/guards/payload.exists.guard';
 
 @Controller('accounts')
 export class AccountController {
     constructor(private _service: AccountService) {}
 
     @Post()
-    @UsePipes(ValidationPipe) //used to transform the birthdate string into a date object
+    @UseGuards(new PayloadGuard())
+    @UsePipes(
+        new ValidationPipe({
+            whitelist: true,
+        }),
+    )
     async create(@Body() account: CreateAccountDto): Promise<Account> {
         return this._service.createAccount(account);
     }
@@ -45,10 +50,16 @@ export class AccountController {
     }
 
     @Put(':id')
-    @UsePipes(ValidationPipe) //used to transform the birthdate string into a date object
+    @UseGuards(new PayloadGuard())
+    @UsePipes(
+        new ValidationPipe({
+            whitelist: true,
+            skipMissingProperties: true
+        }),
+    )
     async updateById(
         @Param('id') id: number,
-        @Body(new ValidatePayloadExistsPipe()) dto: UpdateAccountDTO,
+        @Body() dto: UpdateAccountDto,
     ): Promise<object> {
         return this._service.updateById(id, dto);
     }

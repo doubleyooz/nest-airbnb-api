@@ -7,7 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import {
     CreateAccountDto,
-    UpdateAccountDTO,
+    UpdateAccountDto,
 } from 'src/authentication/dto/account.dto';
 import {
     Repository,
@@ -53,7 +53,7 @@ export class AccountService {
         return result;
     }
 
-    async updateById(_id: number, item: UpdateAccountDTO): Promise<Account> {
+    async updateById(_id: number, item: UpdateAccountDto): Promise<Account> {
         // 1. Se for informado o email, verificar se outro usuário já o possui
 
         if (item.email) {

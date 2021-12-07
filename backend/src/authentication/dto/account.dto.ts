@@ -48,7 +48,7 @@ export class CreateAccountDto {
     birthDate: Date;
 }
 
-export class UpdateAccountDTO {
+export class UpdateAccountDto {
     @ValidateIf((dto) => dto.firstName !== undefined)
     @IsDefined()
     @IsString()
