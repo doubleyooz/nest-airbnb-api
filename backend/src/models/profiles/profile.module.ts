@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { ProfileController } from './profile.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AddressEntity } from 'src/models/addresses/entities/address.entity';
+import { AddressEntity } from '../../models/addresses/entities/address.entity';
 import { ProfileEntity } from './entities/profile.entity';
 import { HostEntity } from '../hosts/entities/host.entity';
 

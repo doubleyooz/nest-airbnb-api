@@ -18,7 +18,7 @@ import {
     CreateAccountDto,
     UpdateAccountDto,
 } from '../../authentication/dto/account.dto';
-import { PayloadGuard } from 'src/common/guards/payload.exists.guard';
+import { PayloadGuard } from '../../common/guards/payload.exists.guard';
 
 @Controller('accounts')
 export class AccountController {

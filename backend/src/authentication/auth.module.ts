@@ -5,9 +5,9 @@ import { AccountModule } from '../models/accounts/account.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
-import { AccountService } from 'src/models/accounts/account.service';
+import { AccountService } from '../models/accounts/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AccountEntity } from 'src/models/accounts/entities/account.entity';
+import { AccountEntity } from '../models/accounts/entities/account.entity';
 
 @Module({
     imports: [

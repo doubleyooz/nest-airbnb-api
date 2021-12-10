@@ -1,9 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { AccountService } from 'src/models/accounts/account.service';
-import { AccountEntity } from 'src/models/accounts/entities/account.entity';
-import { Account } from 'src/models/accounts/interfaces/account.interface';
+import { AccountService } from '../models/accounts/account.service';
+import { AccountEntity } from '../models/accounts/entities/account.entity';
+import { Account } from '../models/accounts/interfaces/account.interface';
 import { getRepository } from 'typeorm';
 import { PayloadDto, SignInDto } from './dto/auth.dto';
 
