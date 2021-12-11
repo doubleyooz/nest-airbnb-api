@@ -4,7 +4,7 @@ import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
 import {
     CreateAccountDto,
-    UpdateAccountDTO,
+    UpdateAccountDto,
 } from '../../authentication/dto/account.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
@@ -59,7 +59,7 @@ describe('AccountController', () => {
             if (_email && _email === temp.email) return [{ id: 1, ...temp }];
             else return undefined;
         }),
-        updateById: jest.fn(async (_id: number, item: UpdateAccountDTO) => {
+        updateById: jest.fn(async (_id: number, item: UpdateAccountDto) => {
             if (item.email === accountExample.email) {
                 throw new BadRequestException('Email already in use.');
             }

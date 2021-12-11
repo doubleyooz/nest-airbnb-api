@@ -34,7 +34,7 @@ describe('AccountService', () => {
     delete temp1.password;
     delete temp2.password;
 
-    const mockAccountRepositoy = {
+    const mockAccountRepository = {
         save: jest.fn().mockImplementation((dto) => dto),
         find: jest.fn().mockImplementation(() => {
             return [
@@ -89,7 +89,7 @@ describe('AccountService', () => {
                 AccountService,
                 {
                     provide: getRepositoryToken(AccountEntity),
-                    useValue: mockAccountRepositoy,
+                    useValue: mockAccountRepository,
                 },
             ],
         }).compile();
@@ -109,7 +109,7 @@ describe('AccountService', () => {
             birthDate: accountExample.birthDate,
         });
 
-        expect(mockAccountRepositoy.save).toBeCalledWith(temp1);
+        expect(mockAccountRepository.save).toBeCalledWith(temp1);
     });
 
     it('should list all accounts', async () => {
@@ -130,7 +130,7 @@ describe('AccountService', () => {
             },
         ]);
 
-        expect(mockAccountRepositoy.find).toBeCalledWith();
+        expect(mockAccountRepository.find).toBeCalledWith();
     });
 
     it('should find an account by its email', async () => {
@@ -143,7 +143,7 @@ describe('AccountService', () => {
         });
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({email: temp1.email});
+        expect(mockAccountRepository.findOne).toBeCalledWith({email: temp1.email});
 
         expect(await service.findByEmail(temp2.email)).toEqual({
             id: expect.any(Number),
@@ -154,7 +154,7 @@ describe('AccountService', () => {
         });
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({email: temp2.email});
+        expect(mockAccountRepository.findOne).toBeCalledWith({email: temp2.email});
 
         try {
             temp1.email = accountExample.email;
@@ -168,7 +168,7 @@ describe('AccountService', () => {
         }
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({email: 'randon@email.com'});
+        expect(mockAccountRepository.findOne).toBeCalledWith({email: 'randon@email.com'});
     });
 
     it('should find an account by its id', async () => {
@@ -181,7 +181,7 @@ describe('AccountService', () => {
         });
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({id: 1});
+        expect(mockAccountRepository.findOne).toBeCalledWith({id: 1});
 
         expect(await service.findById(2)).toEqual({
             id: expect.any(Number),
@@ -192,7 +192,7 @@ describe('AccountService', () => {
         });
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({id: 2});
+        expect(mockAccountRepository.findOne).toBeCalledWith({id: 2});
 
         try {
             expect(await service.findById(3)).toThrow(NotFoundException);
@@ -203,7 +203,7 @@ describe('AccountService', () => {
         }
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({id: 3});
+        expect(mockAccountRepository.findOne).toBeCalledWith({id: 3});
     });
 
     it('should update an account by its id', async () => {
@@ -216,7 +216,7 @@ describe('AccountService', () => {
         });
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({id: 1});
+        expect(mockAccountRepository.findOne).toBeCalledWith({id: 1});
 
         expect(await service.findById(2)).toEqual({
             id: expect.any(Number),
@@ -227,7 +227,7 @@ describe('AccountService', () => {
         });
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({id: 2});
+        expect(mockAccountRepository.findOne).toBeCalledWith({id: 2});
 
         try {
             expect(await service.findById(3)).toThrow(NotFoundException);
@@ -238,6 +238,6 @@ describe('AccountService', () => {
         }
 
         // prettier-ignore
-        expect(mockAccountRepositoy.findOne).toBeCalledWith({id: 3});
+        expect(mockAccountRepository.findOne).toBeCalledWith({id: 3});
     });
 });
