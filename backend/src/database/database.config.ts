@@ -6,23 +6,27 @@ const env = process.env.ENV || 'dev';
 const dotenv_path = path.resolve(process.cwd(), `.${env}.env`);
 const result = dotenv.config({ path: dotenv_path });
 if (result.error) {
-    
+    //do nothing
 }
 */
+
+const database = process.env.ENV == "dev" ? process.env.POSTGRES_DATABASE : process.env.POSTGRES_TEST_DATABASE
+
+
 export const DatabaseConfig: ConnectionOptions = {
     type: 'postgres',
     host: process.env.POSTGRE_HOST,
     port: parseInt(<string>process.env.POSTGRE_PORT),
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DATABASE,   
+    database: database,   
     synchronize: false, //do not set it true in production
     connectTimeoutMS: 2000,   
     entities: ['dist/**/*.entity{.ts,.js}'],  
 
     // Run migrations automatically,
     // you can disable this if you prefer running migration manually.
-    migrationsRun: true,
+    migrationsRun: process.env.RUN_MIGRATIONS == 'true',
     logging: true,
     logger: 'file',
 
