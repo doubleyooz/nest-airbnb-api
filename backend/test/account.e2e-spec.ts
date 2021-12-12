@@ -23,7 +23,7 @@ describe('AccountController (e2e)', () => {
                     password: process.env.POSTGRES_PASSWORD,
                     database: process.env.POSTGRES_DATABASE,
                     autoLoadEntities: true,
-                    synchronize: true, //do not use it in production
+                    synchronize: false, //do not set it true in production
                     retryDelay: 2000,
                     retryAttempts: 2,
                 }),
