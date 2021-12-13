@@ -1,6 +1,6 @@
 version: '3.3'
 
-services:
+services:  
   postgres:
     container_name: postgres_container
     image: postgres:14.1        
@@ -11,7 +11,7 @@ services:
       POSTGRES_TEST_DB: ${POSTGRES_TEST_DATABASE}
       PGDATA: /data/postgres    
     volumes:
-       - ./postgres:/data/postgres
+       - ./postgres:/data/postgres     
        - ./src/database/scripts:/docker-entrypoint-initdb.d/
      
      
@@ -40,6 +40,7 @@ services:
     restart: unless-stopped
 
 networks:
+  nestjs-network:
   postgres:
     driver: bridge
 
