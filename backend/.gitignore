@@ -3,6 +3,9 @@
 /node_modules
 /postgres
 .env
+.env.development
+.env.production
+.env.test
 
 # Logs
 logs
