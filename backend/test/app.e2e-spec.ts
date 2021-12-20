@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseConfig } from '../src/database/database.config';
+import { DatabaseConfig } from '../src/config/database/postgres/configuration.service';
 import { AccountModule } from '../src/models/accounts/account.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';

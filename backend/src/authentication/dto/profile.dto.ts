@@ -8,8 +8,8 @@ import {
     Length,
     ValidateNested,
 } from 'class-validator';
-import { AddressEntity } from 'src/models/addresses/entities/address.entity';
-import { HostEntity } from 'src/models/hosts/entities/host.entity';
+import { AddressEntity } from '../../models/addresses/entities/address.entity';
+import { HostEntity } from '../../models/hosts/entities/host.entity';
 
 export class CreateProfileDto {
     @IsDefined()

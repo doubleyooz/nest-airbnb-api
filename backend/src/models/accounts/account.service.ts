@@ -8,7 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
     CreateAccountDto,
     UpdateAccountDto,
-} from 'src/authentication/dto/account.dto';
+} from '../../authentication/dto/account.dto';
 import {
     Repository,
     getConnection,

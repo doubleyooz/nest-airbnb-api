@@ -12,7 +12,7 @@ import {
     UsePipes,
     ValidationPipe,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { AuthService } from './auth.service';
 
 import { SignInDto } from './dto/auth.dto';

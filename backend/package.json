@@ -23,7 +23,12 @@
     "test:e2e:watch": "jest --config test/jest-e2e.json --watch",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js --config src/database/database.config.ts",
     "migration:create": "yarn build && yarn run typeorm migration:create -- -n",
-    "migration:generate": "yarn build && yarn run typeorm migration:generate -- -n"
+    "migration:generate": "yarn build && yarn run typeorm migration:generate -- -n",
+    "dc:up": "sudo docker-compose --env-file .env.development up -d",
+    "dc:down": "sudo docker-compose --env-file .env.development down",
+    "dc:deepdown": "yarn dc:delete:volumes && yarn dc:delete:postgres",
+    "dc:delete:volumes": "sudo docker-compose --env-file .env.development down -v",
+    "dc:delete:postgres": "sudo rm -rf postgres"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.3",

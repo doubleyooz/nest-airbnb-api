@@ -5,7 +5,7 @@ import { AccountModule } from '../src/models/accounts/account.module';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from '../src/models/accounts/entities/account.entity';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseConfig } from '../src/database/database.config';
+import { DatabaseConfig } from '../src/config/database/postgres/configuration.service';
 import { AppModule } from 'src/app.module';
 import { Repository } from 'typeorm';
 import { Account } from 'src/models/accounts/interfaces/account.interface';
@@ -17,7 +17,7 @@ let app: INestApplication;
 let repository: Repository<AccountEntity>;
 
 beforeAll(async () => {
-    console.log(DatabaseConfig);
+   
     const module = await Test.createTestingModule({
         imports: [
             AccountModule,          
