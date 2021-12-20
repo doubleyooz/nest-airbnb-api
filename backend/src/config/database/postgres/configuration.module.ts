@@ -8,4 +8,4 @@ import configVariables from "./configuration.constant";
     exports: [TypeOrmConfigService],
     providers: [TypeOrmConfigService],
 })
-export class TypeOrmModule {}
+export class TypeOrmConfigModule {}
