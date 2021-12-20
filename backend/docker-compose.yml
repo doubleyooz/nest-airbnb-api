@@ -5,9 +5,9 @@ services:
     container_name: postgres_container
     image: postgres:14.1        
     environment:      
-      DATABASE_USER: ${TYPEORM_USER}
-      DATABASE_PASSWORD: ${TYPEORM_PASSWORD}
-      DATABASE_NAME: ${TYPEORM_NAME}
+      POSTGRES_USER: ${TYPEORM_USER}
+      POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
+      POSTGRES_DB: ${TYPEORM_NAME}
       DATABASE_TEST_NAME: ${TYPEORM_TEST_NAME}
       PGDATA: /data/postgres    
     volumes:
@@ -40,7 +40,6 @@ services:
     restart: unless-stopped
 
 networks:
-  nestjs-network:
   postgres:
     driver: bridge
 

@@ -4,7 +4,6 @@ import { Type } from 'class-transformer';
 import { IsDefined, IsInt, IsString } from 'class-validator';
 import { Logger } from 'typeorm';
 import { ValidatedConfigService } from '../../utils/validate.config';
-import myFeatureConfig from './configuration.constant';
 
 type logger = 'advanced-console' | 'simple-console' | 'file' | 'debug' | Logger;
 
@@ -28,9 +27,8 @@ export class TypeOrmConfigService extends ValidatedConfigService {
 
     @IsInt()
     @IsDefined()
-    @Type(() => Number)
-    get port(): number {
-        return this.configService.get('db.port');
+    get port(): number {       
+        return parseInt(this.configService.get<string>('db.port'), 10);
     }
 
     @IsString()

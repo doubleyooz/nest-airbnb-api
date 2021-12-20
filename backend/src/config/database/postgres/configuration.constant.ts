@@ -6,7 +6,7 @@ export default registerAs('db', () => ({
     username: process.env.TYPEORM_USER,
     password: process.env.TYPEORM_PASSWORD,
     name:
-        process.env.APP_ENV == 'dev'
+        process.env.APP_ENV == 'development'
             ? process.env.TYPEORM_NAME
             : process.env.TYPEORM_TEST_NAME,
 }));

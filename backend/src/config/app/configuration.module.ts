@@ -8,4 +8,4 @@ import configVariables from "./configuration.constant";
     exports: [AppConfigService],
     providers: [AppConfigService],
 })
-export class AppModule {}
+export class AppConfigModule {}

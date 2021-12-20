@@ -3,10 +3,14 @@ import {
     TypeOrmModuleAsyncOptions,
     TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from '../database/postgres/configuration.service';
+import { TypeOrmModule } from 'config/database/postgres/configuration.module';
+import { TypeOrmConfigService } from 'config/database/postgres/configuration.service';
 
 export default class TypeOrmConfig {
-    static getOrmConfig(configService: TypeOrmConfigService): TypeOrmModuleOptions {
+    static getOrmConfig(
+        configService: TypeOrmConfigService,
+    ): TypeOrmModuleOptions {
+        console.log(configService.port) //????????????
         return {
             type: 'postgres',
             host: configService.host,
@@ -14,24 +18,30 @@ export default class TypeOrmConfig {
             username: configService.username,
             password: configService.password,
             database: configService.name,
-            entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-            migrations: [__dirname + '/database/migrations/**/*{.ts,.js}'],
-            //migrationsDir: 'src/database/migrations',
+            entities: ['dist/**/*.entity{.ts,.js}'],
+            synchronize: false,
             migrationsRun: true,
-            synchronize: true,
-            logger: 'file',
             logging: true,
+            logger: 'file',
+
+           
+            migrations: [__dirname + '/database/migrations/**/*{.ts,.js}'],
+            cli: {
+                migrationsDir: 'src/database/migrations',
+            },
+
+            
+
             connectTimeoutMS: 2000,
         };
     }
 }
 
-export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {   
-    imports: [ConfigModule],
-    
+export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
+    imports: [TypeOrmModule],
     useFactory: async (
         configService: TypeOrmConfigService,
     ): Promise<TypeOrmModuleOptions> =>
         TypeOrmConfig.getOrmConfig(configService),
-  
+    inject: [TypeOrmConfigService],
 };

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Type } from 'class-transformer';
 import { IsDefined, IsInt } from 'class-validator';
 import { ValidatedConfigService } from '../utils/validate.config';
 
@@ -10,10 +9,10 @@ export class AppConfigService extends ValidatedConfigService {
         super();
     }
 
-    @IsInt()
     @IsDefined()
-    @Type(() => Number)
-    get port(): number {
-        return this.configService.get('app.port');
+    @IsInt()      
+    get port(): number {    
+        return  parseInt(this.configService.get<string>('app.port'), 10)
+                
     }
 }
