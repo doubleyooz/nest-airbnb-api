@@ -28,7 +28,7 @@ export class TypeOrmConfigService extends ValidatedConfigService {
     @IsInt()
     @IsDefined()
     get port(): number {       
-        return parseInt(this.configService.get<string>('db.port'), 10);
+        return parseInt(this.configService.get('db.port'), 10);
     }
 
     @IsString()

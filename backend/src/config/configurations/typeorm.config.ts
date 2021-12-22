@@ -13,12 +13,11 @@ export default class TypeOrmConfig {
             password: configService.password,
             database: configService.name,
             entities: ['dist/**/*.entity{.ts,.js}'],
-            synchronize: false,
-            migrationsRun: true,
+            synchronize: false,           
             logging: true,
             logger: 'file',
 
-            migrations: [__dirname + 'src/database/migrations/**/*{.ts,.js}'],
+            migrations: ["dist/migrations/*.js"],
             cli: {
                 migrationsDir: 'src/database/migrations',
             },

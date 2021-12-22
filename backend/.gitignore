@@ -2,10 +2,12 @@
 /dist
 /node_modules
 /postgres
+
 .env
 .env.development
 .env.production
 .env.test
+ormconfig.json
 
 # Logs
 logs
