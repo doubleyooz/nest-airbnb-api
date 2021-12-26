@@ -32,7 +32,7 @@ describe('POST /accounts', () => {
             firstName: acc1.firstName,
             lastName: acc1.lastName,
             email: acc1.email,
-            birthDate: acc1.birthDate,
+            birthDate: acc1.birthDate.toISOString(),
             tokenVersion: 1,
         });
     });
