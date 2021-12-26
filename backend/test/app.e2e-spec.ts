@@ -1,35 +1,29 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
-import { ConfigModule } from '@nestjs/config';
-import { DatabaseConfig } from '../src/config/database/postgres/configuration.service';
-import { AccountModule } from '../src/models/accounts/account.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { config } from 'dotenv';
-config();
+
+import { bootstrapTest } from './app/bootstrap.e2e';
 
 describe('AppController (e2e)', () => {
-    let app: INestApplication;
+    let app: INestApplication;    
+  
 
     beforeAll(async () => {
-        const moduleFixture: TestingModule = await Test.createTestingModule({
-            imports: [AppModule],
-        }).compile();
-
-        app = moduleFixture.createNestApplication();
-        // app.useLogger(new TestLogger()) // more on this line is below
-        await app.init();
-    });
+      app = await bootstrapTest();  
+    
+      await app.init();
+    }); 
+    
 
     afterAll(async () => {
         await app.close();
     });
 
-    it('/ (GET)', () => {
-        return request(app.getHttpServer())
-            .get('/')
-            .expect(200)
-            .expect('Hello World!');
+    describe('GET /', () => {
+        it('should return hello world', async () => {
+            const response = await request.default(app.getHttpServer())
+                .get('/')
+                .expect(200);
+            expect(response.text).toEqual('Hello World!');
+        });
     });
 });

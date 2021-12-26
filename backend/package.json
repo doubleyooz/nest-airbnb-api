@@ -26,11 +26,10 @@
     "migration:generate": "yarn build && yarn run typeorm migration:generate -- -n",
     "migrate:up": "ts-node  --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "migrate:down": "ts-node ./node_modules/typeorm/cli.js migration:revert",
-
-
     "dc:up": "sudo docker-compose --env-file .env.development up",
     "dc:down": "sudo docker-compose --env-file .env.development down",
     "dc:deepdown": "yarn dc:delete:volumes && yarn dc:delete:postgres",
+    "dc:stop": "sudo docker-compose --env-file .env.development stop",
     "dc:delete:volumes": "sudo docker-compose --env-file .env.development down -v",
     "dc:delete:postgres": "sudo rm -rf postgres"
   },

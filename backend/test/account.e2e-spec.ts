@@ -1,33 +1,21 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import supertest, * as request from 'supertest';
-import { AccountModule } from '../src/models/accounts/account.module';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
-import { AccountEntity } from '../src/models/accounts/entities/account.entity';
-import { ConfigModule } from '@nestjs/config';
-import { DatabaseConfig } from '../src/config/database/postgres/configuration.service';
-import { AppModule } from 'src/app.module';
+import * as Request from 'supertest';
+import { AccountEntity } from '../src/models/accounts/account.entity';
+
 import { Repository } from 'typeorm';
-import { Account } from 'src/models/accounts/interfaces/account.interface';
-import { config } from 'dotenv';
-config();
+import { Account } from '../src/models/accounts/interfaces/account.interface';
+import { bootstrapTest } from './app/account.e2e';
+
 
 let app: INestApplication;
 
 let repository: Repository<AccountEntity>;
 
-beforeAll(async () => {
-   
-    const module = await Test.createTestingModule({
-        imports: [
-            AccountModule,          
-            // Use the e2e_test database to run the tests
-            TypeOrmModule.forRoot(DatabaseConfig),
-        ],
-    }).compile();
-    app = module.createNestApplication();
+beforeAll(async () => {    
+    app = await bootstrapTest();
     await app.init();
-    repository = module.get('AccountRepository');
+    repository = app.get('AccountRepository');
 });
 
 afterAll(async () => {
@@ -57,7 +45,7 @@ describe('GET /accounts', () => {
         await repository.save([account, account2]);
 
         // Run your end-to-end test
-        const { body } = await supertest
+        const { body } = await Request
             .agent(app.getHttpServer())
             .get('/accounts')
             .set('Accept', 'application/json')
