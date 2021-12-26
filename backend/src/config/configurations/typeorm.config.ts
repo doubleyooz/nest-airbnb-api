@@ -17,7 +17,7 @@ export default class TypeOrmConfig {
             logging: true,
             logger: 'file',
 
-            migrations: ["dist/migrations/*.js"],
+            migrations: ["dist/database/migrations/*.js"],
             cli: {
                 migrationsDir: 'src/database/migrations',
             },

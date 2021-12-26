@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Account } from './interfaces/account.interface';
-import { AccountController } from './account.controller';
-import { AccountService } from './account.service';
+import { Account } from '../interfaces/account.interface';
+import { AccountController } from '../account.controller';
+import { AccountService } from '../account.service';
 import {
     CreateAccountDto,
     UpdateAccountDto,
-} from '../../authentication/dto/account.dto';
+} from '../../../authentication/dto/account.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('AccountController', () => {

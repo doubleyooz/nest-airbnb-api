@@ -33,7 +33,7 @@ export class TypeOrmConfigService extends ValidatedConfigService {
 
     @IsString()
     @IsDefined()
-    get username(): string {
+    get username(): string {        
         return this.configService.get<string>('db.username');
     }
 
@@ -46,6 +46,7 @@ export class TypeOrmConfigService extends ValidatedConfigService {
     @IsString()
     @IsDefined()
     get name(): string {
+        console.log(this.configService.get<string>('db.name'));
         return this.configService.get<string>('db.name');
     }
 }
