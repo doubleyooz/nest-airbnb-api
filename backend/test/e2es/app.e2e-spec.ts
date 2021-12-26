@@ -1,7 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
-import { bootstrapTest } from '../apps/bootstrap.e2e';
+import { bootstrapTest } from '../apps/bootstrap.app';
 
 describe('AppController (e2e)', () => {
     let app: INestApplication;    

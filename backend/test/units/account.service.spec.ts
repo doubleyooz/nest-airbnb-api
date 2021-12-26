@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Account } from '../interfaces/account.interface';
-import { AccountController } from '../account.controller';
-import { AccountService } from '../account.service';
+import { Account } from '../../src/models/accounts/interfaces/account.interface';
+import { AccountController } from '../../src/models/accounts/account.controller';
+import { AccountService } from '../../src/models/accounts/account.service';
 import {
     CreateAccountDto,
     UpdateAccountDto,
-} from '../../../authentication/dto/account.dto';
+} from '../../src/authentication/dto/account.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { AccountEntity } from '../account.entity';
+import { AccountEntity } from '../../src/models/accounts/account.entity';
 
 describe('AccountService', () => {
     let service: AccountService;

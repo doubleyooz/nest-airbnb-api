@@ -1,10 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { Repository } from 'typeorm';
 
-import { AccountEntity } from '../../src/models/accounts/account.entity';
-
-import { bootstrapTest } from '../apps/account.e2e';
+import { bootstrapTest } from '../apps/account.app';
 import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
 
 let app: INestApplication;
@@ -27,25 +24,24 @@ describe('POST /accounts', () => {
             .send(acc1)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(200);
+            .expect(201);
 
         console.log(body);
-        expect(body).toEqual([
-            {
-                id: expect.any(Number),
-                firstName: acc1.firstName,
-                lastName: acc1.lastName,
-                email: acc1.email,
-                birthDate: acc1.birthDate,
-            },
-        ]);
+        expect(body).toMatchObject({
+            id: expect.any(Number),
+            firstName: acc1.firstName,
+            lastName: acc1.lastName,
+            email: acc1.email,
+            birthDate: acc1.birthDate,
+            tokenVersion: 1,
+        });
     });
 
-    describe('when ther account already exists', () => {
+    describe('when the account already exists', () => {
         it('should return BadRequestException', async () => {
             const response = await request
                 .default(app.getHttpServer())
-                .post('/users')
+                .post('/accounts')
                 .send(acc1)
                 .expect(400);
 
@@ -66,14 +62,14 @@ describe('GET /accounts', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-        expect(body).toEqual([
+        expect(body).toMatchObject([
             {
                 id: expect.any(Number),
                 firstName: acc1.firstName,
                 lastName: acc1.lastName,
                 email: acc1.email,
-                birthDate: acc1.birthDate,
-            }
+                birthDate: acc1.birthDate.toISOString(),
+            },
         ]);
     });
 });
