@@ -2,10 +2,10 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { Repository } from 'typeorm';
 
-import { AccountEntity } from '../src/models/accounts/account.entity';
+import { AccountEntity } from '../../src/models/accounts/account.entity';
 
-import { bootstrapTest } from './app/account.e2e';
-import { acc1, acc2, acc3_fake } from './mocks/account.mock';
+import { bootstrapTest } from '../apps/account.e2e';
+import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
 
 
 let app: INestApplication;
