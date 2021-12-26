@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { AccountController } from './account.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AccountEntity } from './entities/account.entity';
-import { HostEntity } from '../hosts/entities/host.entity';
-import { ProfileEntity } from '../profiles/entities/profile.entity';
+import { AccountEntity } from './account.entity';
+import { HostEntity } from '../hosts/host.entity';
+import { ProfileEntity } from '../profiles/profile.entity';
 
 @Module({
     imports: [

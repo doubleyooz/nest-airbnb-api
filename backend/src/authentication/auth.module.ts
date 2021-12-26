@@ -7,7 +7,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
 import { AccountService } from '../models/accounts/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AccountEntity } from '../models/accounts/entities/account.entity';
+import { AccountEntity } from '../models/accounts/account.entity';
 
 @Module({
     imports: [

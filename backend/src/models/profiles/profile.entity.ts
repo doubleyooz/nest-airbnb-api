@@ -1,5 +1,5 @@
-import { AddressEntity } from '../../addresses/entities/address.entity';
-import { AccountEntity } from '../../accounts/entities/account.entity';
+import { AddressEntity } from '../addresses/address.entity';
+import { AccountEntity } from '../accounts/account.entity';
 
 import {
     Column,

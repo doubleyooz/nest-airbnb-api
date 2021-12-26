@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
-import { ProfileEntity } from '../../profiles/entities/profile.entity';
-import { HostEntity } from '../../hosts/entities/host.entity';
+import { ProfileEntity } from '../profiles/profile.entity';
+import { HostEntity } from '../hosts/host.entity';
 import {
     BeforeInsert,
     Column,

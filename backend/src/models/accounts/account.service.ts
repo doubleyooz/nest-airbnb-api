@@ -16,7 +16,7 @@ import {
     DeepPartial,
     InsertResult,
 } from 'typeorm';
-import { AccountEntity } from './entities/account.entity';
+import { AccountEntity } from './account.entity';
 import { Account } from './interfaces/account.interface';
 
 @Injectable()

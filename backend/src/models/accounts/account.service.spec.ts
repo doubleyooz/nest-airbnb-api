@@ -8,7 +8,7 @@ import {
 } from '../../authentication/dto/account.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { AccountEntity } from './entities/account.entity';
+import { AccountEntity } from './account.entity';
 
 describe('AccountService', () => {
     let service: AccountService;
