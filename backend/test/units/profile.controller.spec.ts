@@ -7,7 +7,7 @@ describe('ProfileController', () => {
     let controller: ProfileController;
 
     const mockProfileService = {
-        createUser: jest.fn((dto) => {
+        createProfile: jest.fn((dto) => {
             return {
                 ...dto,
             };
