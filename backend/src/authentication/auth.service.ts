@@ -10,8 +10,8 @@ import { PayloadDto, SignInDto } from './dto/auth.dto';
 @Injectable()
 export class AuthService {
     constructor(
-        private accountService: AccountService,
-        private jwtService: JwtService,
+        private readonly accountService: AccountService,
+        private readonly jwtService: JwtService,
     ) {}
 
     async validateAccount(payload: SignInDto): Promise<any> {
