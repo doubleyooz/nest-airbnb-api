@@ -1,18 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Profile } from '../../src/models/profiles/interfaces/profile.interface';
 import { ProfileController } from '../../src/models/profiles/profile.controller';
 import { ProfileService } from '../../src/models/profiles/profile.service';
+import { profile, profile_fake } from '../mocks/profile.mock';
 
 describe('ProfileController', () => {
     let controller: ProfileController;
-
-    const profileExample: Profile = {
-        gender: 'Male',
-        governmentID: 'filepath',
-        phoneNumber: '9856203541',
-        emergencyContact: '2554dsa6232',
-        nationality: 'brazilian',
-    };
 
     const mockProfileService = {
         createUser: jest.fn((dto) => {
@@ -39,14 +31,12 @@ describe('ProfileController', () => {
     });
 
     it('should create a profile', () => {
-        expect(controller.create(profileExample)).toEqual({
-            emergencyContact: expect.stringMatching(
-                profileExample.emergencyContact,
-            ),
-            gender: expect.stringMatching(profileExample.gender),
-            governmentID: expect.stringMatching(profileExample.governmentID),
-            nationality: expect.stringMatching(profileExample.nationality),
-            phoneNumber: expect.stringMatching(profileExample.phoneNumber),
+        expect(controller.create(profile)).toEqual({
+            emergencyContact: expect.stringMatching(profile.emergencyContact),
+            gender: expect.stringMatching(profile.gender),
+            governmentID: expect.stringMatching(profile.governmentID),
+            nationality: expect.stringMatching(profile.nationality),
+            phoneNumber: expect.stringMatching(profile.phoneNumber),
         });
     });
 });

@@ -1,34 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Account } from '../../src/models/accounts/interfaces/account.interface';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+
 import { AccountController } from '../../src/models/accounts/account.controller';
 import { AccountService } from '../../src/models/accounts/account.service';
 import {
     CreateAccountDto,
     UpdateAccountDto,
 } from '../../src/authentication/dto/account.dto';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+
+import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
 
 describe('AccountController', () => {
     let controller: AccountController;
 
-    const accountExample: Account = {
-        firstName: 'Jojo',
-        lastName: 'Souza',
-        password: 'asdasdksda12',
-        email: 'Jojo@email.com',
-        birthDate: new Date('1999-06-26'),
-    };
-
-    const accountExample2: Account = {
-        firstName: 'Lala',
-        lastName: 'Monteiro',
-        password: 'asdasdkssadasdda12',
-        email: 'Lala321@fmail.com',
-        birthDate: new Date('1980-03-15'),
-    };
-
-    const temp1 = { ...accountExample };
-    const temp2 = { ...accountExample2 };
+    const temp1 = { ...acc1 };
+    const temp2 = { ...acc2 };
     delete temp1.password;
     delete temp2.password;
 
@@ -48,19 +34,19 @@ describe('AccountController', () => {
         }),
 
         findById: jest.fn(async (_id: number) => {
-            const temp = accountExample2;
+            const temp = acc2;
             delete temp.password;
             if (_id && _id === 5) return [{ id: 5, ...temp }];
             else return undefined;
         }),
         findByEmail: jest.fn(async (_email: string) => {
-            const temp = accountExample;
+            const temp = acc1;
             delete temp.password;
             if (_email && _email === temp.email) return [{ id: 1, ...temp }];
             else return undefined;
         }),
         updateById: jest.fn(async (_id: number, item: UpdateAccountDto) => {
-            if (item.email === accountExample.email) {
+            if (item.email === acc1.email) {
                 throw new BadRequestException('Email already in use.');
             }
 
@@ -101,15 +87,15 @@ describe('AccountController', () => {
     });
 
     it('should create an account', async () => {
-        expect(await controller.create(accountExample)).toEqual({
+        expect(await controller.create(acc1)).toEqual({
             id: expect.any(Number),
-            firstName: accountExample.firstName,
-            lastName: accountExample.lastName,
-            email: accountExample.email,
-            birthDate: accountExample.birthDate,
+            firstName: acc1.firstName,
+            lastName: acc1.lastName,
+            email: acc1.email,
+            birthDate: acc1.birthDate,
         });
 
-        expect(mockAccountService.createAccount).toBeCalledWith(accountExample);
+        expect(mockAccountService.createAccount).toBeCalledWith(acc1);
     });
 
     it('should list all accounts', async () => {
@@ -125,10 +111,10 @@ describe('AccountController', () => {
         expect(await controller.findOne(5, null)).toEqual([
             {
                 id: expect.any(Number),
-                firstName: accountExample2.firstName,
-                lastName: accountExample2.lastName,
-                email: accountExample2.email,
-                birthDate: accountExample2.birthDate,
+                firstName: acc2.firstName,
+                lastName: acc2.lastName,
+                email: acc2.email,
+                birthDate: acc2.birthDate,
             },
         ]);
 
@@ -158,7 +144,7 @@ describe('AccountController', () => {
             expect(e.message).toBe('Account not found or already removed.');
         }
         try {
-            temp1.email = accountExample.email;
+            temp1.email = acc1.email;
             expect(await controller.updateById(5, temp1)).toThrow(
                 BadRequestException,
             );
