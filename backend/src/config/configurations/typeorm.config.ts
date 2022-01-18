@@ -12,7 +12,7 @@ export default class TypeOrmConfig {
             username: configService.username,
             password: configService.password,
             database: configService.name,
-            entities: ['{src, dist}/models/**/*.entity{.ts,.js}'],
+            entities: ['dist/models/**/*.entity.js'],
             synchronize: false,
             logging: true,
             logger: 'file',

@@ -15,12 +15,6 @@ export class TypeOrmConfigService extends ValidatedConfigService {
 
     @IsString()
     @IsDefined()
-    get type(): string {
-        return this.configService.get<string>('db.type');
-    }
-
-    @IsString()
-    @IsDefined()
     get host(): string {
         return this.configService.get<string>('db.host');
     }
