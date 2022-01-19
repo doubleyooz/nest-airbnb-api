@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     async validate(payload: PayloadDto): Promise<PayloadDto> {
-        if (this.authService.validateTokenVersion(payload))
+        if (this.authService.validateToken(payload))
             return {
                 id: payload.id,
                 tokenVersion: payload.tokenVersion,

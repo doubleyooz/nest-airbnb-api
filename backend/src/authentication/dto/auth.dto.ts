@@ -24,7 +24,7 @@ export class SignInDto {
 export class PayloadDto {
     @IsDefined()
     @IsNotEmpty()
-    id: number;
+    id: string;
 
     @IsDefined()
     @IsNotEmpty()

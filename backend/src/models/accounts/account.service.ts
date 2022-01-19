@@ -45,7 +45,7 @@ export class AccountService {
         return result;
     }
 
-    async findById(id: number): Promise<Account | undefined> {
+    async findById(id: string): Promise<Account | undefined> {
         const result: Account = await this._repository.findOne({ id });
         if (!result) {
             throw new NotFoundException('User not found or already removed.');
@@ -80,7 +80,7 @@ export class AccountService {
         return result;
     }
 
-    async deleteById(_id: number): Promise<DeleteResult> {
+    async deleteById(_id: string): Promise<DeleteResult> {
         return this._repository.delete({ id: _id });
     }
 }

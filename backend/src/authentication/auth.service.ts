@@ -12,13 +12,12 @@ export class AuthService {
     constructor(
         private readonly accountService: AccountService,
         private readonly jwtService: JwtService,
-    ) {}
+    ) { }
 
     async validateAccount(payload: SignInDto): Promise<any> {
-        console.log('service');
         const account: AccountEntity = await getRepository(AccountEntity)
             .createQueryBuilder('account')
-            .where('account.id = :id', { id: 1 })
+            .where('account.email = :email', { email: payload.email })
             .select('account.id', 'id')
             .addSelect('account.tokenVersion', 'tokenVersion')
             .addSelect('password')
@@ -47,7 +46,7 @@ export class AuthService {
         throw new UnauthorizedException();
     }
 
-    async validateTokenVersion(payload: PayloadDto) {
+    async validateToken(payload: PayloadDto) {
         const account = await getRepository(AccountEntity)
             .createQueryBuilder()
             .from(AccountEntity, 'account')
@@ -62,21 +61,36 @@ export class AuthService {
         return account !== undefined;
     }
 
-    googleLogin(req) {
-        
+    async googleLogin(req: { user: Account }) {
+
         if (!req.user) {
-          throw new UnauthorizedException()
+            throw new UnauthorizedException()
         }
-        return {
-            access_token: this.jwtService.sign({
-                id: req.user.id,
-                token_version: req.user.tokenVersion,
-            }),
-            refresh_token: this.jwtService.sign({
-                id: req.user.id,
-                token_version: req.user.tokenVersion,
-            }),
-        };
+
+        const account: AccountEntity = await getRepository(AccountEntity)
+            .createQueryBuilder('account')
+            .where('account.email = :email', { email: req.user.email })
+            .select('account.id', 'id')
+            .addSelect('account.tokenVersion', 'tokenVersion')
+            .getRawOne();
+
+        console.log(account);
+
+        if (account) {
+            return {
+                access_token: this.jwtService.sign({
+                    id: account.id,
+                    token_version: account.tokenVersion,
+                }),
+                refresh_token: this.jwtService.sign({
+                    id: account.id,
+                    token_version: account.tokenVersion,
+                }),
+            };
+        }
+
+        throw new UnauthorizedException("Account not registered");
+
     }
-      
+
 }

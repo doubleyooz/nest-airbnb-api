@@ -37,7 +37,7 @@ export class AccountController {
 
     @Get('find')
     async findOne(
-        @Query('id') _id: number,
+        @Query('id') _id: string,
         @Query('email') _email: string,
     ): Promise<Account | undefined> {
         if (_email) return this._service.findByEmail(_email);
@@ -65,7 +65,7 @@ export class AccountController {
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: number): Promise<object> {
+    async delete(@Param('id') id: string): Promise<object> {
         return this._service.deleteById(id);
     }
 }

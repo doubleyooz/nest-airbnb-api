@@ -15,8 +15,8 @@ import {
 
 @Entity('account')
 export class AccountEntity {
-    @PrimaryGeneratedColumn('increment')
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column()
     firstName: string;

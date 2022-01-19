@@ -12,8 +12,8 @@ import {
 
 @Entity('address')
 export class AddressEntity {
-    @PrimaryGeneratedColumn('increment')
-    id: number; //put a uuid here
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column()
     street: string;

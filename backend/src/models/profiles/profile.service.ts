@@ -20,7 +20,7 @@ export class ProfileService {
         return this.profileRepository.find();
     }
 
-    findOneProfile(id: number): Promise<Profile | undefined> {
+    findOneProfile(id: string): Promise<Profile | undefined> {
         return this.profileRepository.findOne({ id });
     }
 }

@@ -14,8 +14,8 @@ import {
 
 @Entity('profile')
 export class ProfileEntity {
-    @PrimaryGeneratedColumn('increment')
-    id: number; //put a uuid here
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column()
     gender: string;

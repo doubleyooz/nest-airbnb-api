@@ -13,8 +13,8 @@ import {
 
 @Entity('host')
 export class HostEntity {
-    @PrimaryGeneratedColumn('increment')
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column('int')
     placeType: number;
