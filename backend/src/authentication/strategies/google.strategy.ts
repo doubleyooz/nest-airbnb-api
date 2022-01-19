@@ -10,11 +10,11 @@ config();
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
-    constructor(private readonly configService: GoogleConfigService) {        
+    constructor(private readonly configService: GoogleConfigService) {
         super({
             clientID: configService.googleId,
             clientSecret: configService.googleSecret,
-            callbackURL: configService.host + 'google/redirect',
+            callbackURL: configService.host + 'auth/google/redirect',
             scope: ['email', 'profile'],
         });
     }

@@ -61,4 +61,22 @@ export class AuthService {
         console.log(account !== undefined);
         return account !== undefined;
     }
+
+    googleLogin(req) {
+        
+        if (!req.user) {
+          throw new UnauthorizedException()
+        }
+        return {
+            access_token: this.jwtService.sign({
+                id: req.user.id,
+                token_version: req.user.tokenVersion,
+            }),
+            refresh_token: this.jwtService.sign({
+                id: req.user.id,
+                token_version: req.user.tokenVersion,
+            }),
+        };
+    }
+      
 }
