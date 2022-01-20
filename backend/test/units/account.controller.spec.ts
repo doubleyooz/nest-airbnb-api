@@ -101,8 +101,8 @@ describe('AccountController', () => {
 
     it('should list all accounts', async () => {
         expect(await controller.findAll()).toEqual([
-            { id: 1, ...temp1 },
-            { id: 2, ...temp2 },
+            { id: "a", ...temp1 },
+            { id: "b", ...temp2 },
         ]);
 
         expect(mockAccountService.findAllAccounts).toBeCalledWith();

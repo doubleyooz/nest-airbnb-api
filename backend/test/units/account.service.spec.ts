@@ -150,7 +150,7 @@ describe('AccountService', () => {
         }
 
         // prettier-ignore
-        expect(mockAccountRepository.findOne).toBeCalledWith({email: 'randon@email.com'});
+        expect(mockAccountRepository.findOne).toBeCalledWith({email: acc3_fake.email});
     });
 
     it('should find an account by its id', async () => {

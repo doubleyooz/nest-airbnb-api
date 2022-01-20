@@ -119,7 +119,7 @@ describe('AuthController', () => {
 
         describe('when googleLogin cant find a user', () => {
             it('should return the payload', async () => {
-                const result = await controller.signin(acc2);
+                const result = await controller.googleAuthRedirect(acc2);
                 expect(result).toMatchObject({
                     message: getMessage('account.notfound'),
                     data: expect.any(Object),
