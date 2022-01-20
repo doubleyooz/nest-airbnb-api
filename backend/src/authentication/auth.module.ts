@@ -9,9 +9,9 @@ import { AccountService } from '../models/accounts/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from '../models/accounts/account.entity';
 import { GoogleStrategy } from './strategies/google.strategy';
-import { GoogleConfigModule } from 'config/strategy/google/configuration.module';
-import { JwtConfigModule } from 'config/strategy/jwt/configuration.module';
-import { JwtConfigService } from 'config/strategy/jwt/configuration.service';
+import { GoogleConfigModule } from '../config/strategy/google/configuration.module';
+import { JwtConfigModule } from '../config/strategy/jwt/configuration.module';
+import { JwtConfigService } from '../config/strategy/jwt/configuration.service';
 
 @Module({
     imports: [

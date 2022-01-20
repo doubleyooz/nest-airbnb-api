@@ -14,6 +14,7 @@ import { TypeOrmConfigService } from '../../src/config/database/postgres/configu
 import { AccountController } from '../../src/models/accounts/account.controller';
 import { AccountModule } from '../../src/models/accounts/account.module';
 import { AccountService } from '../../src/models/accounts/account.service';
+import { PassportModule } from '@nestjs/passport';
 
 const ENV = process.env.NODE_ENV;
 export async function bootstrapTest(): Promise<INestApplication> {
@@ -23,10 +24,11 @@ export async function bootstrapTest(): Promise<INestApplication> {
             ConfigModule.forRoot({
               envFilePath: !ENV ? '.env' : `.env.${ENV}`,
             }),
+            PassportModule,   
             TypeOrmModule.forFeature([
-                AccountEntity,
-                ProfileEntity,
-                HostEntity,
+                AccountEntity
+                
+                
             ]),
             TypeOrmModule.forRootAsync({
                 imports: [TypeOrmConfigModule],
