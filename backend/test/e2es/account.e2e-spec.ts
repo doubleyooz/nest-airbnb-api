@@ -1,4 +1,5 @@
 import { INestApplication } from '@nestjs/common';
+import { getMessage } from 'common/helpers/message.helper';
 import * as request from 'supertest';
 
 import { bootstrapTest } from '../apps/account.app';
@@ -46,7 +47,7 @@ describe('POST /accounts', () => {
                 .expect(400);
 
             expect(response.body).toEqual(
-                'An user with this email or phone already exists.',
+                getMessage("account.invalid.email.duplicate"),
             );
         });
     });

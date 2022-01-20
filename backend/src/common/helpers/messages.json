@@ -1,0 +1,12 @@
+{
+    "badRequest": "You didn't give us what we want!",
+    "helloWorld": "Hello World!",
+    
+    "account.notfound": "Account not found or already removed.",
+    "account.invalid.email.duplicate": "Email already in use.",
+    "account.invalid.password": "Invalid Password",
+    "account.invalid.password.short": "Password is too short - should be 8 chars minimum.",
+    "account.invalid.password.weak": "the password must contain at least 1 number, at least 1 lower case letter, at least 1 upper case and at least 1 special character.",
+    "account.valid.sign_in.sucess": "Successful login.",
+    "account.valid.sign_up.sucess": "Successful resgistration."
+}

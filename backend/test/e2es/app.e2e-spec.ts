@@ -1,4 +1,5 @@
 import { INestApplication } from '@nestjs/common';
+import { getMessage } from 'common/helpers/message.helper';
 import * as request from 'supertest';
 
 import { bootstrapTest } from '../apps/bootstrap.app';
@@ -23,7 +24,7 @@ describe('AppController (e2e)', () => {
             const response = await request.default(app.getHttpServer())
                 .get('/')
                 .expect(200);
-            expect(response.text).toEqual('Hello World!');
+            expect(response.text).toEqual(getMessage("helloWorld"));
         });
     });
 });

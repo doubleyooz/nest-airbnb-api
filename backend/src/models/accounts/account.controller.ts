@@ -58,7 +58,7 @@ export class AccountController {
         }),
     )
     async updateById(
-        @Param('id') id: number,
+        @Param('id') id: string,
         @Body() dto: UpdateAccountDto,
     ): Promise<object> {
         return this._service.updateById(id, dto);

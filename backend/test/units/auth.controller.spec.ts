@@ -25,11 +25,11 @@ describe('AuthController', () => {
             if (acc1 && isPasswordMatching) {
                 return {
                     access_token: jwtService.sign({
-                        id: 2,
+                        id: 'b',
                         token_version: 0,
                     }),
                     refresh_token: jwtService.sign({
-                        id: 2,
+                        id: 'b',
                         token_version: 0,
                     }),
                 };

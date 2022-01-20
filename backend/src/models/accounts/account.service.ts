@@ -18,6 +18,7 @@ import {
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { Account } from './interfaces/account.interface';
+import { getMessage } from 'common/helpers/message.helper';
 
 @Injectable()
 export class AccountService {
@@ -40,7 +41,7 @@ export class AccountService {
     async findByEmail(email: string): Promise<Account | undefined> {
         const result: Account = await this._repository.findOne({ email });
         if (!result) {
-            throw new NotFoundException('User not found or already removed.');
+            throw new NotFoundException(getMessage("account.notfound"));
         }
         return result;
     }
@@ -48,12 +49,12 @@ export class AccountService {
     async findById(id: string): Promise<Account | undefined> {
         const result: Account = await this._repository.findOne({ id });
         if (!result) {
-            throw new NotFoundException('User not found or already removed.');
+            throw new NotFoundException(getMessage("account.notfound"));
         }
         return result;
     }
 
-    async updateById(_id: number, item: UpdateAccountDto): Promise<Account> {
+    async updateById(_id: string, item: UpdateAccountDto): Promise<Account> {
         // 1. Se for informado o email, verificar se outro usuário já o possui
 
         if (item.email) {
@@ -61,7 +62,7 @@ export class AccountService {
                 where: { email: item.email },
             });
             if (account) {
-                throw new BadRequestException('Email already in use.');
+                throw new BadRequestException(getMessage("account.invalid.email.duplicate"));
             }
         }
 
@@ -74,7 +75,7 @@ export class AccountService {
 
         if (!result) {
             throw new NotFoundException(
-                'Account not found or already removed.',
+                getMessage("account.notfound")
             );
         }
         return result;
