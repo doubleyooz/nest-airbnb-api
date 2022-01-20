@@ -23,10 +23,28 @@ export class SignInDto {
 
 export class PayloadDto {
     @IsDefined()
+    @IsString()
     @IsNotEmpty()
-    id: string;
+    readonly id: string;
 
     @IsDefined()
     @IsNotEmpty()
     tokenVersion: number;
 }
+
+export class GoogleDto {
+    @IsDefined()
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail()
+    readonly email: string;
+
+    @IsDefined()
+    @IsString()
+    @IsNotEmpty()
+    firstName: string;
+
+    @IsString()
+    lastName: string;
+}
+

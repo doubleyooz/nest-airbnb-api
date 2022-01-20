@@ -1,18 +1,18 @@
+import * as bcrypt from 'bcrypt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import { getRepository } from 'typeorm';
+
 import { AccountService } from '../models/accounts/account.service';
 import { AccountEntity } from '../models/accounts/account.entity';
-import { Account } from '../models/accounts/interfaces/account.interface';
-import { getRepository } from 'typeorm';
-import { PayloadDto, SignInDto } from './dto/auth.dto';
+import { GoogleDto, PayloadDto, SignInDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly accountService: AccountService,
         private readonly jwtService: JwtService,
-    ) { }
+    ) {}
 
     async validateAccount(payload: SignInDto): Promise<any> {
         const account: AccountEntity = await getRepository(AccountEntity)
@@ -61,10 +61,9 @@ export class AuthService {
         return account !== undefined;
     }
 
-    async googleLogin(req: { user: Account }) {
-
+    async googleLogin(req: { user: GoogleDto }) {
         if (!req.user) {
-            throw new UnauthorizedException()
+            throw new UnauthorizedException();
         }
 
         const account: AccountEntity = await getRepository(AccountEntity)
@@ -89,8 +88,7 @@ export class AuthService {
             };
         }
 
-        throw new UnauthorizedException("Account not registered");
-
+        console.log('Account not registered');
+        return req.user;
     }
-
 }
