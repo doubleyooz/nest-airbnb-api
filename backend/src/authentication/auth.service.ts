@@ -6,6 +6,7 @@ import { getRepository } from 'typeorm';
 import { AccountService } from '../models/accounts/account.service';
 import { AccountEntity } from '../models/accounts/account.entity';
 import { GoogleDto, PayloadDto, SignInDto } from './dto/auth.dto';
+import { getMessage } from '../common/helpers/message.helper';
 
 @Injectable()
 export class AuthService {
@@ -88,7 +89,9 @@ export class AuthService {
             };
         }
 
-        console.log('Account not registered');
-        return req.user;
+        return {
+            message: getMessage("account.notfound"),
+            data: req.user
+        };
     }
 }

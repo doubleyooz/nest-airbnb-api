@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { getMessage } from 'common/helpers/message.helper';
+import { getMessage } from './common/helpers/message.helper';
 
 @Injectable()
 export class AppService {

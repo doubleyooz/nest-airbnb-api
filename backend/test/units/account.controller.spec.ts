@@ -9,7 +9,7 @@ import {
 } from '../../src/authentication/dto/account.dto';
 
 import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
-import { getMessage } from 'common/helpers/message.helper';
+import { getMessage } from '../../src/common/helpers/message.helper';
 
 describe('AccountController', () => {
     let controller: AccountController;

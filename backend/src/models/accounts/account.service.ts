@@ -18,7 +18,7 @@ import {
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { Account } from './interfaces/account.interface';
-import { getMessage } from 'common/helpers/message.helper';
+import { getMessage } from '../../common/helpers/message.helper';
 
 @Injectable()
 export class AccountService {

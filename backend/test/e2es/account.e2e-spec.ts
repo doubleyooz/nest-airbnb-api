@@ -1,8 +1,8 @@
 import { INestApplication } from '@nestjs/common';
-import { getMessage } from 'common/helpers/message.helper';
 import * as request from 'supertest';
 
 import { bootstrapTest } from '../apps/account.app';
+import { getMessage } from '../../src/common/helpers/message.helper';
 import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
 
 let app: INestApplication;
@@ -47,7 +47,7 @@ describe('POST /accounts', () => {
                 .expect(400);
 
             expect(response.body).toEqual(
-                getMessage("account.invalid.email.duplicate"),
+                getMessage('account.invalid.email.duplicate'),
             );
         });
     });

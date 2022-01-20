@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { JwtStrategy } from '../../src/authentication/jwt.strategy';
+import { JwtStrategy } from '../../src/authentication/strategies/jwt.strategy';
 import { AuthModule } from '../../src/authentication/auth.module';
 import { AuthService } from '../../src/authentication/auth.service';
 
