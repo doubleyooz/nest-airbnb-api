@@ -1,7 +1,4 @@
-import { readFileSync } from 'fs';
-
-
-const messages = JSON.parse(readFileSync(__dirname + '/messages.json', 'utf-8'));
+import * as messages from './messages.json';
 
 export const getMessage = (path: string) => {
     return messages[path] || null;
