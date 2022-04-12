@@ -5,15 +5,15 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { AuthController } from '../../src/authentication/auth.controller';
+import { AuthController } from '../../../src/authentication/auth.controller';
 import {
     GoogleDto,
     PayloadDto,
     SignInDto,
-} from '../../src/authentication/dto/auth.dto';
-import { AuthService } from '../../src/authentication/auth.service';
-import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
-import { getMessage } from '../../src/common/helpers/message.helper';
+} from '../../../src/authentication/dto/auth.dto';
+import { AuthService } from '../../../src/authentication/auth.service';
+import { acc1, acc2, acc3_fake } from '../../mocks/account.mock';
+import { getMessage } from '../../../src/common/helpers/message.helper';
 
 describe('AuthController', () => {
     let controller: AuthController;

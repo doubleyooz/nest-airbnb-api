@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
-import { AccountController } from '../../src/models/accounts/account.controller';
-import { AccountService } from '../../src/models/accounts/account.service';
+import { AccountController } from '../../../src/models/accounts/account.controller';
+import { AccountService } from '../../../src/models/accounts/account.service';
 import {
     CreateAccountDto,
     UpdateAccountDto,
-} from '../../src/authentication/dto/account.dto';
+} from '../../../src/authentication/dto/account.dto';
 
-import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
-import { getMessage } from '../../src/common/helpers/message.helper';
+import { acc1, acc2, acc3_fake } from '../../mocks/account.mock';
+import { getMessage } from '../../../src/common/helpers/message.helper';
 
 describe('AccountController', () => {
     let controller: AccountController;

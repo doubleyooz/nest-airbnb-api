@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Account } from '../../src/models/accounts/interfaces/account.interface';
-import { AccountController } from '../../src/models/accounts/account.controller';
-import { AccountService } from '../../src/models/accounts/account.service';
+import { Account } from '../../../src/models/accounts/interfaces/account.interface';
+import { AccountController } from '../../../src/models/accounts/account.controller';
+import { AccountService } from '../../../src/models/accounts/account.service';
 import {
     CreateAccountDto,
     UpdateAccountDto,
-} from '../../src/authentication/dto/account.dto';
+} from '../../../src/authentication/dto/account.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { AccountEntity } from '../../src/models/accounts/account.entity';
-import { acc1, acc2, acc3_fake } from '../mocks/account.mock';
-import { getMessage } from '../../src/common/helpers/message.helper';
+import { AccountEntity } from '../../../src/models/accounts/account.entity';
+import { acc1, acc2, acc3_fake } from '../../mocks/account.mock';
+import { getMessage } from '../../../src/common/helpers/message.helper';
 
 describe('AccountService', () => {
     let service: AccountService;
